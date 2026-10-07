@@ -1,0 +1,90 @@
+{
+  "created_at": "2026-10-07T22:36:59.045+08:00",
+  "generator": "scripts/run_evidence.py",
+  "files": {
+    "ascii_vectors.json": {
+      "size_bytes": 12013,
+      "sha256": "0d657d54d8fa784e9726e6264eb6c7c15ef2dffe2095eb80d50196c4f8153bb1"
+    },
+    "brute_force_assignment.json": {
+      "size_bytes": 8580,
+      "sha256": "215541e7f7ad7fb53d59eb1c0a522ab6dd7f19240d24df7eb18fafa2353f34a8"
+    },
+    "brute_force_cumulative.json": {
+      "size_bytes": 8434,
+      "sha256": "a6ecf6820010c41cfdae74aee7d42351deabae56b11d5524e683031a4ec4484b"
+    },
+    "collision_buckets_assignment.json": {
+      "size_bytes": 107501,
+      "sha256": "97e23d30f2723311821267c80a612b56d29c3359f74ca8835bb77e68bfb7a32c"
+    },
+    "collision_buckets_cumulative.json": {
+      "size_bytes": 104959,
+      "sha256": "ed55b8a429847c150b8ecf84b2da601b2fe5f8194a724a26381f392484e40bfc"
+    },
+    "collision_examples_assignment.json": {
+      "size_bytes": 1250,
+      "sha256": "0c3a12ada98a554df878e3ca807642483508b9b01afdd376e4163b0e1c7cec41"
+    },
+    "collision_examples_cumulative.json": {
+      "size_bytes": 1120,
+      "sha256": "b9c8c1d8c6b2e19da6e4bcfb28379c14af5712a3327cbdc9966cdb10517e9fd9"
+    },
+    "collision_scan_assignment.csv": {
+      "size_bytes": 8468,
+      "sha256": "7db119af42169e91eae0b3e85e420b21e62f5601cd0c3311285be4e16b0f0fd7"
+    },
+    "collision_scan_assignment.json": {
+      "size_bytes": 128312,
+      "sha256": "c479976668e6359f8cbbabeb6a6345a0e6e624a12f6f8b8c5d4541cdb7f37496"
+    },
+    "collision_scan_cumulative.csv": {
+      "size_bytes": 8980,
+      "sha256": "6dc05ae51a6962735f83bb924f686e5614b007c42cb39a2b128c777662caf8d7"
+    },
+    "collision_scan_cumulative.json": {
+      "size_bytes": 159546,
+      "sha256": "b24e29d5d80137bd53913227be5a4176594f9cd8fc0b361e6bc3606514e99cc5"
+    },
+    "cross_vectors.csv": {
+      "size_bytes": 7618,
+      "sha256": "79eb7681073435aa052ef3b6b9e83c9fdd2b66e5d78ab03cca2fe7eca9995b06"
+    },
+    "cross_vectors.json": {
+      "size_bytes": 27730,
+      "sha256": "01da06e03fa358665c58bc848fd474ac2421328ee2944ac4126f3adc54a10de0"
+    },
+    "equivalent_keys_assignment.json": {
+      "size_bytes": 167200,
+      "sha256": "6e4c1529b032602c1a076be7232f2bc38d114d0f300bc2acf2cd108b4ac86f8a"
+    },
+    "equivalent_keys_cumulative.json": {
+      "size_bytes": 129391,
+      "sha256": "14f489351a3d23f4ceb4b4f1a482264ca13e123fbc0151563c90c0a22164f47f"
+    },
+    "full_mapping_assignment.bin": {
+      "size_bytes": 262144,
+      "sha256": "ed05dd58f52ca19005ada061ed0cd2ae58eb493872a7e685fbafca88e91fd4d0"
+    },
+    "full_mapping_cumulative.bin": {
+      "size_bytes": 262144,
+      "sha256": "379855d6f46622f716ed5f2ca210277366235969d83f3dadb199773f4800e8a9"
+    },
+    "hand_vectors.json": {
+      "size_bytes": 8550,
+      "sha256": "dedbf00730c4766cf4db8706371b20c0d6f33fbfc82cff274a3245cd4a8497a8"
+    },
+    "summary.json": {
+      "size_bytes": 11443,
+      "sha256": "b2acefc9570c069fb4b2a93fed332b474703c9280e3a4a6c2a64a7fb3ff4fdbc"
+    },
+    "unit_tests.json": {
+      "size_bytes": 3431,
+      "sha256": "6b1ad39ae9d1176ad3ec907adeeebe283c585b6782afeea24d749c4fd52973f6"
+    },
+    "unit_tests.txt": {
+      "size_bytes": 3558,
+      "sha256": "3c897890864ae003ccbbe56f2b65313938127ca849cad1256a94f7113cff6c3c"
+    }
+  }
+}

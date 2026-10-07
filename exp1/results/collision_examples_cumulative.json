@@ -1,0 +1,26 @@
+{
+  "schedule": "cumulative",
+  "non_equivalent_collision_example": {
+    "collision_plaintext": "10011010",
+    "same_ciphertext": "00000000",
+    "key1": "0100100111",
+    "key2": "0101101111",
+    "globally_equivalent": false,
+    "distinguishing_plaintext": "00001010",
+    "key1_distinguishing_ciphertext": "00110001",
+    "key2_distinguishing_ciphertext": "10110111"
+  },
+  "globally_equivalent_example": null,
+  "pigeonhole_explanation": "For any fixed 8-bit plaintext, 1024 keys map into at most 256 ciphertexts. Therefore some ciphertext has at least ceil(1024/256)=4 keys, and collisions are unavoidable. This does not prove that those keys agree on every plaintext.",
+  "global_equivalence_criterion": "Two keys are globally equivalent here iff all 256 entries of their complete encryption permutations agree.",
+  "full_mapping": {
+    "file": "full_mapping_cumulative.bin",
+    "shape": [
+      1024,
+      256
+    ],
+    "dtype": "unsigned byte",
+    "offset_formula": "key * 256 + plaintext",
+    "sha256": "379855d6f46622f716ed5f2ca210277366235969d83f3dadb199773f4800e8a9"
+  }
+}

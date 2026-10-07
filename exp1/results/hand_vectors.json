@@ -1,0 +1,306 @@
+{
+  "provenance": "Fixed literals derived by hand from assignment parameters, not copied from core output.",
+  "notes": [
+    "S-box rows are the first and fourth bits; columns are the middle two bits.",
+    "assignment total shifts are 1 and 2; cumulative total shifts are 1 and 3.",
+    "IP inverse is applied only after the second round; no swap follows the second round."
+  ],
+  "vectors": [
+    {
+      "schedule": "assignment",
+      "key": "1010000010",
+      "plaintext": "10011010",
+      "k1": "10100100",
+      "k2": "10010010",
+      "ciphertext": "11101111",
+      "round2_xor": "00101100",
+      "round2_sboxes": "0001",
+      "round2_p4": "0100",
+      "round2": "11110111",
+      "p10": "1000001100",
+      "p10_left": "10000",
+      "p10_right": "01100",
+      "shift1": "0000111000",
+      "shift2_total": "0001010001",
+      "ip": "00011011",
+      "round1_ep": "11010111",
+      "round1_xor": "01110011",
+      "round1_sboxes": "0011",
+      "round1_p4": "0110",
+      "round1": "01111011",
+      "swap": "10110111",
+      "round2_ep": "10111110",
+      "core_trace": {
+        "input": "10011010",
+        "input_int": 154,
+        "key": "1010000010",
+        "schedule": "assignment",
+        "decrypt": false,
+        "subkeys": {
+          "K1": "10100100",
+          "K2": "10010010",
+          "used": [
+            "K1",
+            "K2"
+          ]
+        },
+        "IP": "00011011",
+        "rounds": [
+          {
+            "number": 1,
+            "subkey_name": "K1",
+            "subkey": "10100100",
+            "input": "00011011",
+            "left": "0001",
+            "right": "1011",
+            "EP": "11010111",
+            "xor": "01110011",
+            "SBOX1": {
+              "input": "0111",
+              "row": 1,
+              "column": 3,
+              "output": "00",
+              "output_int": 0
+            },
+            "SBOX2": {
+              "input": "0011",
+              "row": 1,
+              "column": 1,
+              "output": "11",
+              "output_int": 3
+            },
+            "SBOX_output": "0011",
+            "P4": "0110",
+            "newLeft": "0111",
+            "output": "01111011",
+            "output_int": 123
+          },
+          {
+            "number": 2,
+            "subkey_name": "K2",
+            "subkey": "10010010",
+            "input": "10110111",
+            "left": "1011",
+            "right": "0111",
+            "EP": "10111110",
+            "xor": "00101100",
+            "SBOX1": {
+              "input": "0010",
+              "row": 0,
+              "column": 1,
+              "output": "00",
+              "output_int": 0
+            },
+            "SBOX2": {
+              "input": "1100",
+              "row": 2,
+              "column": 2,
+              "output": "01",
+              "output_int": 1
+            },
+            "SBOX_output": "0001",
+            "P4": "0100",
+            "newLeft": "1111",
+            "output": "11110111",
+            "output_int": 247
+          }
+        ],
+        "SW": "10110111",
+        "IPinv": "11101111",
+        "output": "11101111",
+        "output_int": 239,
+        "key_schedule": {
+          "input": "1010000010",
+          "input_int": 642,
+          "schedule": "assignment",
+          "P10": "1000001100",
+          "left": "10000",
+          "right": "01100",
+          "rounds": [
+            {
+              "number": 1,
+              "total_left_shift": 1,
+              "left": "00001",
+              "right": "11000",
+              "shifted": "0000111000",
+              "P8": "10100100",
+              "subkey_int": 164
+            },
+            {
+              "number": 2,
+              "total_left_shift": 2,
+              "left": "00010",
+              "right": "10001",
+              "shifted": "0001010001",
+              "P8": "10010010",
+              "subkey_int": 146
+            }
+          ],
+          "K1": "10100100",
+          "K2": "10010010"
+        }
+      },
+      "reference_trace": {
+        "input": "10011010",
+        "key": "1010000010",
+        "schedule": "assignment",
+        "p10": "1000001100",
+        "k1": "10100100",
+        "k2": "10010010",
+        "ip": "00011011",
+        "round1": "01111011",
+        "swap": "10110111",
+        "round2": "11110111",
+        "output": "11101111"
+      }
+    },
+    {
+      "schedule": "cumulative",
+      "key": "1010000010",
+      "plaintext": "10011010",
+      "k1": "10100100",
+      "k2": "01000011",
+      "ciphertext": "01101011",
+      "round2_xor": "11111101",
+      "round2_sboxes": "1000",
+      "round2_p4": "0001",
+      "round2": "10100111",
+      "p10": "1000001100",
+      "p10_left": "10000",
+      "p10_right": "01100",
+      "shift1": "0000111000",
+      "shift2_total": "0010000011",
+      "ip": "00011011",
+      "round1_ep": "11010111",
+      "round1_xor": "01110011",
+      "round1_sboxes": "0011",
+      "round1_p4": "0110",
+      "round1": "01111011",
+      "swap": "10110111",
+      "round2_ep": "10111110",
+      "core_trace": {
+        "input": "10011010",
+        "input_int": 154,
+        "key": "1010000010",
+        "schedule": "cumulative",
+        "decrypt": false,
+        "subkeys": {
+          "K1": "10100100",
+          "K2": "01000011",
+          "used": [
+            "K1",
+            "K2"
+          ]
+        },
+        "IP": "00011011",
+        "rounds": [
+          {
+            "number": 1,
+            "subkey_name": "K1",
+            "subkey": "10100100",
+            "input": "00011011",
+            "left": "0001",
+            "right": "1011",
+            "EP": "11010111",
+            "xor": "01110011",
+            "SBOX1": {
+              "input": "0111",
+              "row": 1,
+              "column": 3,
+              "output": "00",
+              "output_int": 0
+            },
+            "SBOX2": {
+              "input": "0011",
+              "row": 1,
+              "column": 1,
+              "output": "11",
+              "output_int": 3
+            },
+            "SBOX_output": "0011",
+            "P4": "0110",
+            "newLeft": "0111",
+            "output": "01111011",
+            "output_int": 123
+          },
+          {
+            "number": 2,
+            "subkey_name": "K2",
+            "subkey": "01000011",
+            "input": "10110111",
+            "left": "1011",
+            "right": "0111",
+            "EP": "10111110",
+            "xor": "11111101",
+            "SBOX1": {
+              "input": "1111",
+              "row": 3,
+              "column": 3,
+              "output": "10",
+              "output_int": 2
+            },
+            "SBOX2": {
+              "input": "1101",
+              "row": 3,
+              "column": 2,
+              "output": "00",
+              "output_int": 0
+            },
+            "SBOX_output": "1000",
+            "P4": "0001",
+            "newLeft": "1010",
+            "output": "10100111",
+            "output_int": 167
+          }
+        ],
+        "SW": "10110111",
+        "IPinv": "01101011",
+        "output": "01101011",
+        "output_int": 107,
+        "key_schedule": {
+          "input": "1010000010",
+          "input_int": 642,
+          "schedule": "cumulative",
+          "P10": "1000001100",
+          "left": "10000",
+          "right": "01100",
+          "rounds": [
+            {
+              "number": 1,
+              "total_left_shift": 1,
+              "left": "00001",
+              "right": "11000",
+              "shifted": "0000111000",
+              "P8": "10100100",
+              "subkey_int": 164
+            },
+            {
+              "number": 2,
+              "total_left_shift": 3,
+              "left": "00100",
+              "right": "00011",
+              "shifted": "0010000011",
+              "P8": "01000011",
+              "subkey_int": 67
+            }
+          ],
+          "K1": "10100100",
+          "K2": "01000011"
+        }
+      },
+      "reference_trace": {
+        "input": "10011010",
+        "key": "1010000010",
+        "schedule": "cumulative",
+        "p10": "1000001100",
+        "k1": "10100100",
+        "k2": "01000011",
+        "ip": "00011011",
+        "round1": "01111011",
+        "swap": "10110111",
+        "round2": "10100111",
+        "output": "01101011"
+      }
+    }
+  ]
+}

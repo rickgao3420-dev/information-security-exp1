@@ -1,0 +1,339 @@
+{
+  "original_key": "1010000010",
+  "schedule": "cumulative",
+  "timing_method": "time.perf_counter, wall timestamps local ISO 8601 with timezone",
+  "runs": [
+    {
+      "schedule": "cumulative",
+      "pairs": [
+        {
+          "plaintext": "11010111",
+          "ciphertext": "10001100",
+          "plaintext_int": 215,
+          "ciphertext_int": 140
+        }
+      ],
+      "candidate_keys": [
+        384,
+        642,
+        714
+      ],
+      "candidate_key_bits": [
+        "0110000000",
+        "1010000010",
+        "1011001010"
+      ],
+      "candidate_count": 3,
+      "tested_keys": 1024,
+      "total_keys": 1024,
+      "elapsed_seconds": 0.0010183000049437396,
+      "started_at": "2026-10-07T22:36:58.162+08:00",
+      "finished_at": "2026-10-07T22:36:58.163+08:00",
+      "independent_reference_candidates_match": true,
+      "contains_original_key": true,
+      "progress_events": 1025,
+      "progress_first": [
+        0,
+        1024,
+        0,
+        0.0
+      ],
+      "progress_last": [
+        1024,
+        1024,
+        3,
+        0.0010182000041822903
+      ]
+    },
+    {
+      "schedule": "cumulative",
+      "pairs": [
+        {
+          "plaintext": "11010111",
+          "ciphertext": "10001100",
+          "plaintext_int": 215,
+          "ciphertext_int": 140
+        },
+        {
+          "plaintext": "10011010",
+          "ciphertext": "01101011",
+          "plaintext_int": 154,
+          "ciphertext_int": 107
+        }
+      ],
+      "candidate_keys": [
+        384,
+        642,
+        714
+      ],
+      "candidate_key_bits": [
+        "0110000000",
+        "1010000010",
+        "1011001010"
+      ],
+      "candidate_count": 3,
+      "tested_keys": 1024,
+      "total_keys": 1024,
+      "elapsed_seconds": 0.0009797999955480918,
+      "started_at": "2026-10-07T22:36:58.183+08:00",
+      "finished_at": "2026-10-07T22:36:58.184+08:00",
+      "independent_reference_candidates_match": true,
+      "contains_original_key": true,
+      "progress_events": 1025,
+      "progress_first": [
+        0,
+        1024,
+        0,
+        0.0
+      ],
+      "progress_last": [
+        1024,
+        1024,
+        3,
+        0.0009796999947866425
+      ]
+    },
+    {
+      "schedule": "cumulative",
+      "pairs": [
+        {
+          "plaintext": "11010111",
+          "ciphertext": "10001100",
+          "plaintext_int": 215,
+          "ciphertext_int": 140
+        },
+        {
+          "plaintext": "10011010",
+          "ciphertext": "01101011",
+          "plaintext_int": 154,
+          "ciphertext_int": 107
+        },
+        {
+          "plaintext": "00000000",
+          "ciphertext": "00001110",
+          "plaintext_int": 0,
+          "ciphertext_int": 14
+        }
+      ],
+      "candidate_keys": [
+        642,
+        714
+      ],
+      "candidate_key_bits": [
+        "1010000010",
+        "1011001010"
+      ],
+      "candidate_count": 2,
+      "tested_keys": 1024,
+      "total_keys": 1024,
+      "elapsed_seconds": 0.000999800002318807,
+      "started_at": "2026-10-07T22:36:58.203+08:00",
+      "finished_at": "2026-10-07T22:36:58.204+08:00",
+      "independent_reference_candidates_match": true,
+      "contains_original_key": true,
+      "progress_events": 1025,
+      "progress_first": [
+        0,
+        1024,
+        0,
+        0.0
+      ],
+      "progress_last": [
+        1024,
+        1024,
+        2,
+        0.0009996000007959083
+      ]
+    },
+    {
+      "schedule": "cumulative",
+      "pairs": [
+        {
+          "plaintext": "11010111",
+          "ciphertext": "10001100",
+          "plaintext_int": 215,
+          "ciphertext_int": 140
+        },
+        {
+          "plaintext": "10011010",
+          "ciphertext": "01101011",
+          "plaintext_int": 154,
+          "ciphertext_int": 107
+        },
+        {
+          "plaintext": "00000000",
+          "ciphertext": "00001110",
+          "plaintext_int": 0,
+          "ciphertext_int": 14
+        },
+        {
+          "plaintext": "11111111",
+          "ciphertext": "11101010",
+          "plaintext_int": 255,
+          "ciphertext_int": 234
+        }
+      ],
+      "candidate_keys": [
+        642,
+        714
+      ],
+      "candidate_key_bits": [
+        "1010000010",
+        "1011001010"
+      ],
+      "candidate_count": 2,
+      "tested_keys": 1024,
+      "total_keys": 1024,
+      "elapsed_seconds": 0.0009755999999470077,
+      "started_at": "2026-10-07T22:36:58.224+08:00",
+      "finished_at": "2026-10-07T22:36:58.225+08:00",
+      "independent_reference_candidates_match": true,
+      "contains_original_key": true,
+      "progress_events": 1025,
+      "progress_first": [
+        0,
+        1024,
+        0,
+        0.0
+      ],
+      "progress_last": [
+        1024,
+        1024,
+        2,
+        0.0009754999991855584
+      ]
+    },
+    {
+      "schedule": "cumulative",
+      "pairs": [
+        {
+          "plaintext": "11010111",
+          "ciphertext": "10001100",
+          "plaintext_int": 215,
+          "ciphertext_int": 140
+        },
+        {
+          "plaintext": "10011010",
+          "ciphertext": "01101011",
+          "plaintext_int": 154,
+          "ciphertext_int": 107
+        },
+        {
+          "plaintext": "00000000",
+          "ciphertext": "00001110",
+          "plaintext_int": 0,
+          "ciphertext_int": 14
+        },
+        {
+          "plaintext": "11111111",
+          "ciphertext": "11101010",
+          "plaintext_int": 255,
+          "ciphertext_int": 234
+        },
+        {
+          "plaintext": "01010101",
+          "ciphertext": "11000001",
+          "plaintext_int": 85,
+          "ciphertext_int": 193
+        }
+      ],
+      "candidate_keys": [
+        642
+      ],
+      "candidate_key_bits": [
+        "1010000010"
+      ],
+      "candidate_count": 1,
+      "tested_keys": 1024,
+      "total_keys": 1024,
+      "elapsed_seconds": 0.0010079000057885423,
+      "started_at": "2026-10-07T22:36:58.244+08:00",
+      "finished_at": "2026-10-07T22:36:58.245+08:00",
+      "independent_reference_candidates_match": true,
+      "contains_original_key": true,
+      "progress_events": 1025,
+      "progress_first": [
+        0,
+        1024,
+        0,
+        0.0
+      ],
+      "progress_last": [
+        1024,
+        1024,
+        1,
+        0.001007800005027093
+      ]
+    },
+    {
+      "schedule": "cumulative",
+      "pairs": [
+        {
+          "plaintext": "11010111",
+          "ciphertext": "10001100",
+          "plaintext_int": 215,
+          "ciphertext_int": 140
+        },
+        {
+          "plaintext": "10011010",
+          "ciphertext": "01101011",
+          "plaintext_int": 154,
+          "ciphertext_int": 107
+        },
+        {
+          "plaintext": "00000000",
+          "ciphertext": "00001110",
+          "plaintext_int": 0,
+          "ciphertext_int": 14
+        },
+        {
+          "plaintext": "11111111",
+          "ciphertext": "11101010",
+          "plaintext_int": 255,
+          "ciphertext_int": 234
+        },
+        {
+          "plaintext": "01010101",
+          "ciphertext": "11000001",
+          "plaintext_int": 85,
+          "ciphertext_int": 193
+        },
+        {
+          "plaintext": "10101010",
+          "ciphertext": "10001101",
+          "plaintext_int": 170,
+          "ciphertext_int": 141
+        }
+      ],
+      "candidate_keys": [
+        642
+      ],
+      "candidate_key_bits": [
+        "1010000010"
+      ],
+      "candidate_count": 1,
+      "tested_keys": 1024,
+      "total_keys": 1024,
+      "elapsed_seconds": 0.0009819000042625703,
+      "started_at": "2026-10-07T22:36:58.265+08:00",
+      "finished_at": "2026-10-07T22:36:58.266+08:00",
+      "independent_reference_candidates_match": true,
+      "contains_original_key": true,
+      "progress_events": 1025,
+      "progress_first": [
+        0,
+        1024,
+        0,
+        0.0
+      ],
+      "progress_last": [
+        1024,
+        1024,
+        1,
+        0.0009817000027396716
+      ]
+    }
+  ],
+  "final_key_is_unique": true,
+  "interpretation": "Every candidate is reported. More than one candidate is not a uniquely recovered key."
+}

@@ -1,0 +1,587 @@
+{
+  "captured_at": "2026-10-07T22:30:23.899+08:00",
+  "platform": "offscreen",
+  "window_size": [
+    1140,
+    860
+  ],
+  "tests": [
+    {
+      "name": "默认作业公式位串加密",
+      "passed": true,
+      "details": "00001001"
+    },
+    {
+      "name": "中间步骤可见",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "默认作业公式位串解密",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ASCII Hex 密文无丢失",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ASCII Hex 往返",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "ASCII Base64 往返",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "worker 成功返回",
+      "passed": true,
+      "details": "暴力破解完成。所有候选已显示。"
+    },
+    {
+      "name": "单对破解显示全部候选",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "破解实测计时可见",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "worker 成功返回",
+      "passed": true,
+      "details": "暴力破解完成。所有候选已显示。"
+    },
+    {
+      "name": "多对破解同时满足全部证据",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "worker 成功返回",
+      "passed": true,
+      "details": "碰撞分析完成。所有分组已显示。"
+    },
+    {
+      "name": "碰撞分组覆盖全部 1024 个密钥",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "真实不同密钥同密文",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "非法 8 位输入被拒绝 101",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "非法 8 位输入被拒绝 101010102",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "非法 8 位输入被拒绝 abcd0101",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "非法密钥长度被拒绝",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "非 ASCII 输入被拒绝",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "非法 Base64 被拒绝",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "非法 Hex 被拒绝",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "空明密文对被拒绝",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "非法明密文对被拒绝",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "课件模式同步并清除旧结果",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "课件模式位串加密",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "课件模式位串往返",
+      "passed": true,
+      "details": null
+    }
+  ],
+  "screenshots": [
+    "artifacts\\gui\\01_bits_encrypt.png",
+    "artifacts\\gui\\02_bits_decrypt.png",
+    "artifacts\\gui\\03_ascii_hex.png",
+    "artifacts\\gui\\04_ascii_base64.png",
+    "artifacts\\gui\\05_brute_single_pair.png",
+    "artifacts\\gui\\06_brute_multiple_pairs.png",
+    "artifacts\\gui\\07_collision.png",
+    "artifacts\\gui\\08_invalid_input.png",
+    "artifacts\\gui\\09_invalid_ascii.png",
+    "artifacts\\gui\\10_cumulative_mode.png"
+  ],
+  "brute_force": {
+    "kind": "brute",
+    "schedule": "assignment",
+    "started_at": "2026-10-07T22:30:19.698+08:00",
+    "finished_at": "2026-10-07T22:30:19.702+08:00",
+    "elapsed_seconds": 0.004339399994933046,
+    "worker_elapsed_seconds": 0.005636200003209524,
+    "result": {
+      "schedule": "assignment",
+      "pairs": [
+        {
+          "plaintext": "10101010",
+          "ciphertext": "00001001",
+          "plaintext_int": 170,
+          "ciphertext_int": 9
+        }
+      ],
+      "candidate_keys": [
+        115,
+        371,
+        642,
+        898
+      ],
+      "candidate_key_bits": [
+        "0001110011",
+        "0101110011",
+        "1010000010",
+        "1110000010"
+      ],
+      "candidate_count": 4,
+      "tested_keys": 1024,
+      "total_keys": 1024,
+      "elapsed_seconds": 0.004339399994933046,
+      "started_at": "2026-10-07T22:30:19.698+08:00",
+      "finished_at": "2026-10-07T22:30:19.702+08:00"
+    }
+  },
+  "multiple_pairs": {
+    "kind": "brute",
+    "schedule": "assignment",
+    "started_at": "2026-10-07T22:30:21.646+08:00",
+    "finished_at": "2026-10-07T22:30:21.650+08:00",
+    "elapsed_seconds": 0.003759700004593469,
+    "worker_elapsed_seconds": 0.003838900003756862,
+    "result": {
+      "schedule": "assignment",
+      "pairs": [
+        {
+          "plaintext": "00000000",
+          "ciphertext": "01101010",
+          "plaintext_int": 0,
+          "ciphertext_int": 106
+        },
+        {
+          "plaintext": "00001111",
+          "ciphertext": "10010111",
+          "plaintext_int": 15,
+          "ciphertext_int": 151
+        },
+        {
+          "plaintext": "01010101",
+          "ciphertext": "00000101",
+          "plaintext_int": 85,
+          "ciphertext_int": 5
+        },
+        {
+          "plaintext": "10101010",
+          "ciphertext": "00001001",
+          "plaintext_int": 170,
+          "ciphertext_int": 9
+        },
+        {
+          "plaintext": "11111111",
+          "ciphertext": "10001110",
+          "plaintext_int": 255,
+          "ciphertext_int": 142
+        }
+      ],
+      "candidate_keys": [
+        642,
+        898
+      ],
+      "candidate_key_bits": [
+        "1010000010",
+        "1110000010"
+      ],
+      "candidate_count": 2,
+      "tested_keys": 1024,
+      "total_keys": 1024,
+      "elapsed_seconds": 0.003759700004593469,
+      "started_at": "2026-10-07T22:30:21.646+08:00",
+      "finished_at": "2026-10-07T22:30:21.650+08:00"
+    }
+  },
+  "collision_statistics": {
+    "distinct_ciphertexts": 254,
+    "nonempty_buckets": 254,
+    "empty_buckets": 2,
+    "min_bucket_size": 2,
+    "max_bucket_size": 8,
+    "mean_bucket_size": 4.031496062992126,
+    "collision_buckets": 254,
+    "keys_in_collision_buckets": 1024,
+    "collision_key_pairs": 1736,
+    "bucket_size_histogram": {
+      "2": 42,
+      "4": 168,
+      "6": 42,
+      "8": 2
+    }
+  },
+  "gif": {
+    "path": "D:\\balabala\\信息安全导论\\exp1\\artifacts\\gui\\brute_force_actual.gif",
+    "frame_count": 35,
+    "playback_duration_seconds": 12.7,
+    "actual_computation_seconds": 0.004339399994933046,
+    "note": "真实窗口截图和真实 worker 进度信号。GIF 停留供阅读，播放时长不等于实测破解耗时；计算未插入人为 sleep。",
+    "frames": [
+      {
+        "state": "提交并开始",
+        "done": 0,
+        "total": 1024,
+        "candidates": 0,
+        "signal_elapsed_seconds": 0.0,
+        "captured_at": "2026-10-07T22:30:19.617+08:00",
+        "screenshot": "brute_frames\\frame_000.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 0,
+        "total": 1024,
+        "candidates": 0,
+        "signal_elapsed_seconds": 0.0,
+        "captured_at": "2026-10-07T22:30:19.702+08:00",
+        "screenshot": "brute_frames\\frame_001.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 32,
+        "total": 1024,
+        "candidates": 0,
+        "signal_elapsed_seconds": 0.0001466999965487048,
+        "captured_at": "2026-10-07T22:30:19.762+08:00",
+        "screenshot": "brute_frames\\frame_002.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 64,
+        "total": 1024,
+        "candidates": 0,
+        "signal_elapsed_seconds": 0.000319499995384831,
+        "captured_at": "2026-10-07T22:30:19.807+08:00",
+        "screenshot": "brute_frames\\frame_003.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 96,
+        "total": 1024,
+        "candidates": 0,
+        "signal_elapsed_seconds": 0.0004484999954001978,
+        "captured_at": "2026-10-07T22:30:19.864+08:00",
+        "screenshot": "brute_frames\\frame_004.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 128,
+        "total": 1024,
+        "candidates": 1,
+        "signal_elapsed_seconds": 0.0005705999938072637,
+        "captured_at": "2026-10-07T22:30:19.919+08:00",
+        "screenshot": "brute_frames\\frame_005.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 160,
+        "total": 1024,
+        "candidates": 1,
+        "signal_elapsed_seconds": 0.000694199996360112,
+        "captured_at": "2026-10-07T22:30:19.974+08:00",
+        "screenshot": "brute_frames\\frame_006.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 192,
+        "total": 1024,
+        "candidates": 1,
+        "signal_elapsed_seconds": 0.0008177999989129603,
+        "captured_at": "2026-10-07T22:30:20.058+08:00",
+        "screenshot": "brute_frames\\frame_007.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 224,
+        "total": 1024,
+        "candidates": 1,
+        "signal_elapsed_seconds": 0.001117399995564483,
+        "captured_at": "2026-10-07T22:30:20.121+08:00",
+        "screenshot": "brute_frames\\frame_008.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 256,
+        "total": 1024,
+        "candidates": 1,
+        "signal_elapsed_seconds": 0.0012462999948184006,
+        "captured_at": "2026-10-07T22:30:20.171+08:00",
+        "screenshot": "brute_frames\\frame_009.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 288,
+        "total": 1024,
+        "candidates": 1,
+        "signal_elapsed_seconds": 0.0013767999989795499,
+        "captured_at": "2026-10-07T22:30:20.221+08:00",
+        "screenshot": "brute_frames\\frame_010.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 320,
+        "total": 1024,
+        "candidates": 1,
+        "signal_elapsed_seconds": 0.0015020999999251217,
+        "captured_at": "2026-10-07T22:30:20.267+08:00",
+        "screenshot": "brute_frames\\frame_011.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 352,
+        "total": 1024,
+        "candidates": 1,
+        "signal_elapsed_seconds": 0.001632799998333212,
+        "captured_at": "2026-10-07T22:30:20.343+08:00",
+        "screenshot": "brute_frames\\frame_012.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 384,
+        "total": 1024,
+        "candidates": 2,
+        "signal_elapsed_seconds": 0.0017567999966559,
+        "captured_at": "2026-10-07T22:30:20.393+08:00",
+        "screenshot": "brute_frames\\frame_013.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 416,
+        "total": 1024,
+        "candidates": 2,
+        "signal_elapsed_seconds": 0.0018832999994629063,
+        "captured_at": "2026-10-07T22:30:20.447+08:00",
+        "screenshot": "brute_frames\\frame_014.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 448,
+        "total": 1024,
+        "candidates": 2,
+        "signal_elapsed_seconds": 0.002007699993555434,
+        "captured_at": "2026-10-07T22:30:20.520+08:00",
+        "screenshot": "brute_frames\\frame_015.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 480,
+        "total": 1024,
+        "candidates": 2,
+        "signal_elapsed_seconds": 0.002134899994416628,
+        "captured_at": "2026-10-07T22:30:20.599+08:00",
+        "screenshot": "brute_frames\\frame_016.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 512,
+        "total": 1024,
+        "candidates": 2,
+        "signal_elapsed_seconds": 0.002268999996886123,
+        "captured_at": "2026-10-07T22:30:20.649+08:00",
+        "screenshot": "brute_frames\\frame_017.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 544,
+        "total": 1024,
+        "candidates": 2,
+        "signal_elapsed_seconds": 0.0023965999935171567,
+        "captured_at": "2026-10-07T22:30:20.715+08:00",
+        "screenshot": "brute_frames\\frame_018.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 576,
+        "total": 1024,
+        "candidates": 2,
+        "signal_elapsed_seconds": 0.002522799994039815,
+        "captured_at": "2026-10-07T22:30:20.784+08:00",
+        "screenshot": "brute_frames\\frame_019.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 608,
+        "total": 1024,
+        "candidates": 2,
+        "signal_elapsed_seconds": 0.0026503999979468063,
+        "captured_at": "2026-10-07T22:30:20.837+08:00",
+        "screenshot": "brute_frames\\frame_020.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 640,
+        "total": 1024,
+        "candidates": 2,
+        "signal_elapsed_seconds": 0.002777800000330899,
+        "captured_at": "2026-10-07T22:30:20.897+08:00",
+        "screenshot": "brute_frames\\frame_021.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 672,
+        "total": 1024,
+        "candidates": 3,
+        "signal_elapsed_seconds": 0.0029029999932390638,
+        "captured_at": "2026-10-07T22:30:20.955+08:00",
+        "screenshot": "brute_frames\\frame_022.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 704,
+        "total": 1024,
+        "candidates": 3,
+        "signal_elapsed_seconds": 0.0030487999974866398,
+        "captured_at": "2026-10-07T22:30:21.000+08:00",
+        "screenshot": "brute_frames\\frame_023.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 736,
+        "total": 1024,
+        "candidates": 3,
+        "signal_elapsed_seconds": 0.003173099998093676,
+        "captured_at": "2026-10-07T22:30:21.059+08:00",
+        "screenshot": "brute_frames\\frame_024.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 768,
+        "total": 1024,
+        "candidates": 3,
+        "signal_elapsed_seconds": 0.003296799994132016,
+        "captured_at": "2026-10-07T22:30:21.108+08:00",
+        "screenshot": "brute_frames\\frame_025.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 800,
+        "total": 1024,
+        "candidates": 3,
+        "signal_elapsed_seconds": 0.00342359999922337,
+        "captured_at": "2026-10-07T22:30:21.157+08:00",
+        "screenshot": "brute_frames\\frame_026.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 832,
+        "total": 1024,
+        "candidates": 3,
+        "signal_elapsed_seconds": 0.0035537999938242137,
+        "captured_at": "2026-10-07T22:30:21.204+08:00",
+        "screenshot": "brute_frames\\frame_027.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 864,
+        "total": 1024,
+        "candidates": 3,
+        "signal_elapsed_seconds": 0.0036829999953624792,
+        "captured_at": "2026-10-07T22:30:21.255+08:00",
+        "screenshot": "brute_frames\\frame_028.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 896,
+        "total": 1024,
+        "candidates": 3,
+        "signal_elapsed_seconds": 0.003812599999946542,
+        "captured_at": "2026-10-07T22:30:21.304+08:00",
+        "screenshot": "brute_frames\\frame_029.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 928,
+        "total": 1024,
+        "candidates": 4,
+        "signal_elapsed_seconds": 0.003940499998861924,
+        "captured_at": "2026-10-07T22:30:21.356+08:00",
+        "screenshot": "brute_frames\\frame_030.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 960,
+        "total": 1024,
+        "candidates": 4,
+        "signal_elapsed_seconds": 0.004066099994815886,
+        "captured_at": "2026-10-07T22:30:21.408+08:00",
+        "screenshot": "brute_frames\\frame_031.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 992,
+        "total": 1024,
+        "candidates": 4,
+        "signal_elapsed_seconds": 0.004193699998722877,
+        "captured_at": "2026-10-07T22:30:21.454+08:00",
+        "screenshot": "brute_frames\\frame_032.png"
+      },
+      {
+        "state": "真实检查进度",
+        "done": 1024,
+        "total": 1024,
+        "candidates": 4,
+        "signal_elapsed_seconds": 0.0043330999978934415,
+        "captured_at": "2026-10-07T22:30:21.505+08:00",
+        "screenshot": "brute_frames\\frame_033.png"
+      },
+      {
+        "state": "实际破解完成",
+        "done": 1024,
+        "total": 1024,
+        "candidates": 4,
+        "signal_elapsed_seconds": 0.004339399994933046,
+        "captured_at": "2026-10-07T22:30:21.555+08:00",
+        "screenshot": "brute_frames\\frame_034.png"
+      }
+    ]
+  }
+}

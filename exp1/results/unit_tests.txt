@@ -1,0 +1,34 @@
+test_collision_bad_plaintext_rejected (tests.test_analysis_tools.AnalysisTests.test_collision_bad_plaintext_rejected) ... ok
+test_collision_buckets_really_partition_all_keys (tests.test_analysis_tools.AnalysisTests.test_collision_buckets_really_partition_all_keys) ... ok
+test_empty_or_invalid_pairs_rejected (tests.test_analysis_tools.AnalysisTests.test_empty_or_invalid_pairs_rejected) ... ok
+test_inconsistent_pairs_produce_zero_candidates (tests.test_analysis_tools.AnalysisTests.test_inconsistent_pairs_produce_zero_candidates) ... ok
+test_progress_covers_all_keys (tests.test_analysis_tools.AnalysisTests.test_progress_covers_all_keys) ... ok
+test_single_and_multiple_pairs_keep_true_key (tests.test_analysis_tools.AnalysisTests.test_single_and_multiple_pairs_keep_true_key) ... ok
+test_csv_vectors_match_string_implementation (tests.test_exchange.ExchangeScriptTests.test_csv_vectors_match_string_implementation) ... ok
+test_json_vectors_match_integer_implementation (tests.test_exchange.ExchangeScriptTests.test_json_vectors_match_integer_implementation) ... ok
+test_malformed_bits_are_rejected (tests.test_exchange.ExchangeScriptTests.test_malformed_bits_are_rejected) ... ok
+test_wrong_ciphertext_is_reported (tests.test_exchange.ExchangeScriptTests.test_wrong_ciphertext_is_reported) ... ok
+test_all_128_ascii_characters (tests.test_sdes.ByteAndAsciiTests.test_all_128_ascii_characters) ... ok
+test_all_256_bytes (tests.test_sdes.ByteAndAsciiTests.test_all_256_bytes) ... ok
+test_decrypting_non_ascii_bytes_rejected (tests.test_sdes.ByteAndAsciiTests.test_decrypting_non_ascii_bytes_rejected) ... ok
+test_empty_and_control_and_normal_strings (tests.test_sdes.ByteAndAsciiTests.test_empty_and_control_and_normal_strings) ... ok
+test_non_ascii_rejected (tests.test_sdes.ByteAndAsciiTests.test_non_ascii_rejected) ... ok
+test_all_subkeys_for_both_schedules (tests.test_sdes.CrossImplementationTests.test_all_subkeys_for_both_schedules) ... ok
+test_cumulative_cross_implementation_samples (tests.test_sdes.CrossImplementationTests.test_cumulative_cross_implementation_samples) ... ok
+test_both_schedules_all_keys_all_blocks_and_bijections (tests.test_sdes.ExhaustiveDomainTests.test_both_schedules_all_keys_all_blocks_and_bijections) ... ok
+test_assignment_hand_round_trace (tests.test_sdes.HandVectorTests.test_assignment_hand_round_trace) ... ok
+test_decryption_trace_uses_reversed_keys (tests.test_sdes.HandVectorTests.test_decryption_trace_uses_reversed_keys) ... ok
+test_default_schedule_is_assignment (tests.test_sdes.HandVectorTests.test_default_schedule_is_assignment) ... ok
+test_fixed_subkeys_and_ciphertexts (tests.test_sdes.HandVectorTests.test_fixed_subkeys_and_ciphertexts) ... ok
+test_binary_input_preserves_leading_zeros (tests.test_sdes.InputValidationTests.test_binary_input_preserves_leading_zeros) ... ok
+test_binary_input_rejects_invalid_values (tests.test_sdes.InputValidationTests.test_binary_input_rejects_invalid_values) ... ok
+test_bytes_and_text_types_are_strict (tests.test_sdes.InputValidationTests.test_bytes_and_text_types_are_strict) ... ok
+test_invalid_blocks (tests.test_sdes.InputValidationTests.test_invalid_blocks) ... ok
+test_invalid_keys (tests.test_sdes.InputValidationTests.test_invalid_keys) ... ok
+test_invalid_widths (tests.test_sdes.InputValidationTests.test_invalid_widths) ... ok
+test_unknown_schedule (tests.test_sdes.InputValidationTests.test_unknown_schedule) ... ok
+
+----------------------------------------------------------------------
+Ran 29 tests in 16.565s
+
+OK

@@ -1,0 +1,347 @@
+{
+  "original_key": "1010000010",
+  "schedule": "assignment",
+  "timing_method": "time.perf_counter, wall timestamps local ISO 8601 with timezone",
+  "runs": [
+    {
+      "schedule": "assignment",
+      "pairs": [
+        {
+          "plaintext": "11010111",
+          "ciphertext": "11101000",
+          "plaintext_int": 215,
+          "ciphertext_int": 232
+        }
+      ],
+      "candidate_keys": [
+        180,
+        436,
+        603,
+        642,
+        859,
+        898
+      ],
+      "candidate_key_bits": [
+        "0010110100",
+        "0110110100",
+        "1001011011",
+        "1010000010",
+        "1101011011",
+        "1110000010"
+      ],
+      "candidate_count": 6,
+      "tested_keys": 1024,
+      "total_keys": 1024,
+      "elapsed_seconds": 0.0010393000047770329,
+      "started_at": "2026-10-07T22:36:57.601+08:00",
+      "finished_at": "2026-10-07T22:36:57.602+08:00",
+      "independent_reference_candidates_match": true,
+      "contains_original_key": true,
+      "progress_events": 1025,
+      "progress_first": [
+        0,
+        1024,
+        0,
+        0.0
+      ],
+      "progress_last": [
+        1024,
+        1024,
+        6,
+        0.0010391000032541342
+      ]
+    },
+    {
+      "schedule": "assignment",
+      "pairs": [
+        {
+          "plaintext": "11010111",
+          "ciphertext": "11101000",
+          "plaintext_int": 215,
+          "ciphertext_int": 232
+        },
+        {
+          "plaintext": "10011010",
+          "ciphertext": "11101111",
+          "plaintext_int": 154,
+          "ciphertext_int": 239
+        }
+      ],
+      "candidate_keys": [
+        642,
+        898
+      ],
+      "candidate_key_bits": [
+        "1010000010",
+        "1110000010"
+      ],
+      "candidate_count": 2,
+      "tested_keys": 1024,
+      "total_keys": 1024,
+      "elapsed_seconds": 0.000960900004429277,
+      "started_at": "2026-10-07T22:36:57.621+08:00",
+      "finished_at": "2026-10-07T22:36:57.622+08:00",
+      "independent_reference_candidates_match": true,
+      "contains_original_key": true,
+      "progress_events": 1025,
+      "progress_first": [
+        0,
+        1024,
+        0,
+        0.0
+      ],
+      "progress_last": [
+        1024,
+        1024,
+        2,
+        0.0009607000029063784
+      ]
+    },
+    {
+      "schedule": "assignment",
+      "pairs": [
+        {
+          "plaintext": "11010111",
+          "ciphertext": "11101000",
+          "plaintext_int": 215,
+          "ciphertext_int": 232
+        },
+        {
+          "plaintext": "10011010",
+          "ciphertext": "11101111",
+          "plaintext_int": 154,
+          "ciphertext_int": 239
+        },
+        {
+          "plaintext": "00000000",
+          "ciphertext": "01101010",
+          "plaintext_int": 0,
+          "ciphertext_int": 106
+        }
+      ],
+      "candidate_keys": [
+        642,
+        898
+      ],
+      "candidate_key_bits": [
+        "1010000010",
+        "1110000010"
+      ],
+      "candidate_count": 2,
+      "tested_keys": 1024,
+      "total_keys": 1024,
+      "elapsed_seconds": 0.0009528999944450334,
+      "started_at": "2026-10-07T22:36:57.641+08:00",
+      "finished_at": "2026-10-07T22:36:57.642+08:00",
+      "independent_reference_candidates_match": true,
+      "contains_original_key": true,
+      "progress_events": 1025,
+      "progress_first": [
+        0,
+        1024,
+        0,
+        0.0
+      ],
+      "progress_last": [
+        1024,
+        1024,
+        2,
+        0.0009527000001980923
+      ]
+    },
+    {
+      "schedule": "assignment",
+      "pairs": [
+        {
+          "plaintext": "11010111",
+          "ciphertext": "11101000",
+          "plaintext_int": 215,
+          "ciphertext_int": 232
+        },
+        {
+          "plaintext": "10011010",
+          "ciphertext": "11101111",
+          "plaintext_int": 154,
+          "ciphertext_int": 239
+        },
+        {
+          "plaintext": "00000000",
+          "ciphertext": "01101010",
+          "plaintext_int": 0,
+          "ciphertext_int": 106
+        },
+        {
+          "plaintext": "11111111",
+          "ciphertext": "10001110",
+          "plaintext_int": 255,
+          "ciphertext_int": 142
+        }
+      ],
+      "candidate_keys": [
+        642,
+        898
+      ],
+      "candidate_key_bits": [
+        "1010000010",
+        "1110000010"
+      ],
+      "candidate_count": 2,
+      "tested_keys": 1024,
+      "total_keys": 1024,
+      "elapsed_seconds": 0.0009655000030761585,
+      "started_at": "2026-10-07T22:36:57.664+08:00",
+      "finished_at": "2026-10-07T22:36:57.665+08:00",
+      "independent_reference_candidates_match": true,
+      "contains_original_key": true,
+      "progress_events": 1025,
+      "progress_first": [
+        0,
+        1024,
+        0,
+        0.0
+      ],
+      "progress_last": [
+        1024,
+        1024,
+        2,
+        0.0009654000023147091
+      ]
+    },
+    {
+      "schedule": "assignment",
+      "pairs": [
+        {
+          "plaintext": "11010111",
+          "ciphertext": "11101000",
+          "plaintext_int": 215,
+          "ciphertext_int": 232
+        },
+        {
+          "plaintext": "10011010",
+          "ciphertext": "11101111",
+          "plaintext_int": 154,
+          "ciphertext_int": 239
+        },
+        {
+          "plaintext": "00000000",
+          "ciphertext": "01101010",
+          "plaintext_int": 0,
+          "ciphertext_int": 106
+        },
+        {
+          "plaintext": "11111111",
+          "ciphertext": "10001110",
+          "plaintext_int": 255,
+          "ciphertext_int": 142
+        },
+        {
+          "plaintext": "01010101",
+          "ciphertext": "00000101",
+          "plaintext_int": 85,
+          "ciphertext_int": 5
+        }
+      ],
+      "candidate_keys": [
+        642,
+        898
+      ],
+      "candidate_key_bits": [
+        "1010000010",
+        "1110000010"
+      ],
+      "candidate_count": 2,
+      "tested_keys": 1024,
+      "total_keys": 1024,
+      "elapsed_seconds": 0.0009640999996918254,
+      "started_at": "2026-10-07T22:36:57.685+08:00",
+      "finished_at": "2026-10-07T22:36:57.686+08:00",
+      "independent_reference_candidates_match": true,
+      "contains_original_key": true,
+      "progress_events": 1025,
+      "progress_first": [
+        0,
+        1024,
+        0,
+        0.0
+      ],
+      "progress_last": [
+        1024,
+        1024,
+        2,
+        0.000963999998930376
+      ]
+    },
+    {
+      "schedule": "assignment",
+      "pairs": [
+        {
+          "plaintext": "11010111",
+          "ciphertext": "11101000",
+          "plaintext_int": 215,
+          "ciphertext_int": 232
+        },
+        {
+          "plaintext": "10011010",
+          "ciphertext": "11101111",
+          "plaintext_int": 154,
+          "ciphertext_int": 239
+        },
+        {
+          "plaintext": "00000000",
+          "ciphertext": "01101010",
+          "plaintext_int": 0,
+          "ciphertext_int": 106
+        },
+        {
+          "plaintext": "11111111",
+          "ciphertext": "10001110",
+          "plaintext_int": 255,
+          "ciphertext_int": 142
+        },
+        {
+          "plaintext": "01010101",
+          "ciphertext": "00000101",
+          "plaintext_int": 85,
+          "ciphertext_int": 5
+        },
+        {
+          "plaintext": "10101010",
+          "ciphertext": "00001001",
+          "plaintext_int": 170,
+          "ciphertext_int": 9
+        }
+      ],
+      "candidate_keys": [
+        642,
+        898
+      ],
+      "candidate_key_bits": [
+        "1010000010",
+        "1110000010"
+      ],
+      "candidate_count": 2,
+      "tested_keys": 1024,
+      "total_keys": 1024,
+      "elapsed_seconds": 0.0009672999949543737,
+      "started_at": "2026-10-07T22:36:57.705+08:00",
+      "finished_at": "2026-10-07T22:36:57.706+08:00",
+      "independent_reference_candidates_match": true,
+      "contains_original_key": true,
+      "progress_events": 1025,
+      "progress_first": [
+        0,
+        1024,
+        0,
+        0.0
+      ],
+      "progress_last": [
+        1024,
+        1024,
+        2,
+        0.000967200001468882
+      ]
+    }
+  ],
+  "final_key_is_unique": false,
+  "interpretation": "Every candidate is reported. More than one candidate is not a uniquely recovered key."
+}

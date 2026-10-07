@@ -1,0 +1,355 @@
+{
+  "schema": "sdes-experiment1-evidence-v1",
+  "started_at": "2026-10-07T22:36:40.980+08:00",
+  "finished_at": "2026-10-07T22:36:58.733+08:00",
+  "elapsed_seconds": 17.753411400000914,
+  "primary_schedule": "assignment",
+  "schedule_definitions": {
+    "assignment": {
+      "total_half_shifts": [
+        1,
+        2
+      ]
+    },
+    "cumulative": {
+      "total_half_shifts": [
+        1,
+        3
+      ]
+    }
+  },
+  "parameters": {
+    "P10": [
+      3,
+      5,
+      2,
+      7,
+      4,
+      10,
+      1,
+      9,
+      8,
+      6
+    ],
+    "P8": [
+      6,
+      3,
+      7,
+      4,
+      8,
+      5,
+      10,
+      9
+    ],
+    "IP": [
+      2,
+      6,
+      3,
+      1,
+      4,
+      8,
+      5,
+      7
+    ],
+    "IP_inverse": [
+      4,
+      1,
+      3,
+      5,
+      7,
+      2,
+      8,
+      6
+    ],
+    "EP": [
+      4,
+      1,
+      2,
+      3,
+      2,
+      3,
+      4,
+      1
+    ],
+    "P4": [
+      2,
+      4,
+      3,
+      1
+    ],
+    "SBOX1": [
+      [
+        1,
+        0,
+        3,
+        2
+      ],
+      [
+        3,
+        2,
+        1,
+        0
+      ],
+      [
+        0,
+        2,
+        1,
+        3
+      ],
+      [
+        3,
+        1,
+        0,
+        2
+      ]
+    ],
+    "SBOX2": [
+      [
+        0,
+        1,
+        2,
+        3
+      ],
+      [
+        2,
+        3,
+        1,
+        0
+      ],
+      [
+        3,
+        0,
+        1,
+        2
+      ],
+      [
+        2,
+        1,
+        0,
+        3
+      ]
+    ]
+  },
+  "environment": {
+    "python": "3.13.5 | packaged by Anaconda, Inc. | (main, Jun 12 2025, 16:37:03) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "E:\\anaconda3\\python.exe",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "implementation": "CPython",
+    "cwd": "D:\\balabala\\信息安全导论\\exp1"
+  },
+  "source_sha256": {
+    "sdes.py": "e01d504496394b0c256610ab297d4594ec1c619a443d190b29e99f525cb29266",
+    "analysis_tools.py": "5410c3a541e813340b9541b89acd8c3320863dc5bdfb6db393756f19a3b94cde",
+    "reference_sdes.py": "699a955753502c912b1009b8383c2fab2b3c59f159b2cd8857a48dfd6dcefc6f",
+    "scripts/run_evidence.py": "c5e9ae6246c843c64a4ae41f5b5875fb854e523f4a97d2e17e63a17806d3b0aa",
+    "scripts/compare_cross_vectors.py": "7d91ac2a6a41c78a08c64e41a0b5cd08e5dd8df677f2ddaa11569a4a85fff650",
+    "tests/test_sdes.py": "59d2cf67b38b31296460fa61dac0f521657165f0eec01baefa86dc88ec21307a",
+    "tests/test_analysis_tools.py": "f312e93d5ef93662998057087427d62fbf26531b93e43a49866cee647b4c618a",
+    "tests/test_exchange.py": "9394e56a4a9810cf49d4f3354460c90d725ab9df4284d07f5221d037ca43b068"
+  },
+  "unit_tests": {
+    "started_at": "2026-10-07T22:36:41.004+08:00",
+    "finished_at": "2026-10-07T22:36:57.570+08:00",
+    "elapsed_seconds": 16.565431800001534,
+    "tests_run": 29,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "successful": true,
+    "test_names": [
+      "tests.test_analysis_tools.AnalysisTests.test_collision_bad_plaintext_rejected",
+      "tests.test_analysis_tools.AnalysisTests.test_collision_buckets_really_partition_all_keys",
+      "tests.test_analysis_tools.AnalysisTests.test_empty_or_invalid_pairs_rejected",
+      "tests.test_analysis_tools.AnalysisTests.test_inconsistent_pairs_produce_zero_candidates",
+      "tests.test_analysis_tools.AnalysisTests.test_progress_covers_all_keys",
+      "tests.test_analysis_tools.AnalysisTests.test_single_and_multiple_pairs_keep_true_key",
+      "tests.test_exchange.ExchangeScriptTests.test_csv_vectors_match_string_implementation",
+      "tests.test_exchange.ExchangeScriptTests.test_json_vectors_match_integer_implementation",
+      "tests.test_exchange.ExchangeScriptTests.test_malformed_bits_are_rejected",
+      "tests.test_exchange.ExchangeScriptTests.test_wrong_ciphertext_is_reported",
+      "tests.test_sdes.ByteAndAsciiTests.test_all_128_ascii_characters",
+      "tests.test_sdes.ByteAndAsciiTests.test_all_256_bytes",
+      "tests.test_sdes.ByteAndAsciiTests.test_decrypting_non_ascii_bytes_rejected",
+      "tests.test_sdes.ByteAndAsciiTests.test_empty_and_control_and_normal_strings",
+      "tests.test_sdes.ByteAndAsciiTests.test_non_ascii_rejected",
+      "tests.test_sdes.CrossImplementationTests.test_all_subkeys_for_both_schedules",
+      "tests.test_sdes.CrossImplementationTests.test_cumulative_cross_implementation_samples",
+      "tests.test_sdes.ExhaustiveDomainTests.test_both_schedules_all_keys_all_blocks_and_bijections",
+      "tests.test_sdes.HandVectorTests.test_assignment_hand_round_trace",
+      "tests.test_sdes.HandVectorTests.test_decryption_trace_uses_reversed_keys",
+      "tests.test_sdes.HandVectorTests.test_default_schedule_is_assignment",
+      "tests.test_sdes.HandVectorTests.test_fixed_subkeys_and_ciphertexts",
+      "tests.test_sdes.InputValidationTests.test_binary_input_preserves_leading_zeros",
+      "tests.test_sdes.InputValidationTests.test_binary_input_rejects_invalid_values",
+      "tests.test_sdes.InputValidationTests.test_bytes_and_text_types_are_strict",
+      "tests.test_sdes.InputValidationTests.test_invalid_blocks",
+      "tests.test_sdes.InputValidationTests.test_invalid_keys",
+      "tests.test_sdes.InputValidationTests.test_invalid_widths",
+      "tests.test_sdes.InputValidationTests.test_unknown_schedule"
+    ],
+    "failed_or_error_test_names": [],
+    "exhaustive_test": "tests.test_sdes.ExhaustiveDomainTests.test_both_schedules_all_keys_all_blocks_and_bijections",
+    "assignment_encryptions_compared": 262144,
+    "assignment_core_round_trips": 262144,
+    "assignment_reference_round_trips": 262144,
+    "assignment_bijections_verified": 1024,
+    "cumulative_encryptions_compared": 262144,
+    "cumulative_core_round_trips": 262144,
+    "cumulative_reference_round_trips": 262144,
+    "cumulative_bijections_verified": 1024,
+    "cumulative_additional_sample_encryptions_compared": 16384,
+    "total_exhaustive_encryptions_compared": 524288,
+    "total_exhaustive_core_round_trips": 524288,
+    "total_exhaustive_reference_round_trips": 524288,
+    "total_bijections_verified": 2048,
+    "subkey_pairs_compared_each_schedule": 1024
+  },
+  "stage1_basic": {
+    "hand_vectors_passed": true,
+    "exhaustive_assignment_pairs": 262144,
+    "fixed_key_bijections_verified": 1024,
+    "invalid_inputs_rejected": true,
+    "gui_evidence": "See separate GUI screenshots and screenshot manifest generated by scripts/capture_gui.py."
+  },
+  "stage2_cross_implementation": {
+    "exchange_vectors": 128,
+    "external_group_test_status": "not_performed",
+    "independent_local_cross_check": "passed",
+    "exhaustive_cases_per_schedule": 262144,
+    "total_exhaustive_cases": 524288,
+    "checks_each_case": [
+      "core encryption equals independent string-reference encryption",
+      "core decrypts reference ciphertext to original plaintext",
+      "reference decrypts core ciphertext to original plaintext"
+    ],
+    "fixed_key_bijections_per_schedule": 1024
+  },
+  "stage3_ascii": {
+    "cases": 10,
+    "all_128_ascii_verified": true,
+    "all_256_bytes_verified": true,
+    "non_ascii_rejections": 4
+  },
+  "schedule_results": {
+    "assignment": {
+      "brute_force": {
+        "single_pair_candidate_count": 6,
+        "multiple_pair_candidate_count": 2,
+        "single_pair_candidates": [
+          "0010110100",
+          "0110110100",
+          "1001011011",
+          "1010000010",
+          "1101011011",
+          "1110000010"
+        ],
+        "multiple_pair_candidates": [
+          "1010000010",
+          "1110000010"
+        ],
+        "candidate_counts_by_pair_count": [
+          6,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "elapsed_seconds_by_pair_count": [
+          0.0010393000047770329,
+          0.000960900004429277,
+          0.0009528999944450334,
+          0.0009655000030761585,
+          0.0009640999996918254,
+          0.0009672999949543737
+        ],
+        "contains_original_key": true
+      },
+      "collisions": {
+        "plaintexts_scanned": 256,
+        "keys_each": 1024,
+        "encryptions": 262144,
+        "min_distinct_ciphertexts": 254,
+        "max_distinct_ciphertexts": 254,
+        "largest_bucket_size": 8,
+        "all_plaintexts_have_collisions": true,
+        "distinct_permutations": 512,
+        "equivalent_group_count": 512,
+        "largest_equivalence_group": 2,
+        "scan_elapsed_seconds": 0.1043065000048955,
+        "equivalence_elapsed_seconds": 0.07635449999361299,
+        "non_equivalent_collision_example": {
+          "collision_plaintext": "10011010",
+          "same_ciphertext": "00000000",
+          "key1": "0001001111",
+          "key2": "0010010011",
+          "globally_equivalent": false,
+          "distinguishing_plaintext": "00000001",
+          "key1_distinguishing_ciphertext": "00110001",
+          "key2_distinguishing_ciphertext": "11111101"
+        }
+      }
+    },
+    "cumulative": {
+      "brute_force": {
+        "single_pair_candidate_count": 3,
+        "multiple_pair_candidate_count": 1,
+        "single_pair_candidates": [
+          "0110000000",
+          "1010000010",
+          "1011001010"
+        ],
+        "multiple_pair_candidates": [
+          "1010000010"
+        ],
+        "candidate_counts_by_pair_count": [
+          3,
+          3,
+          2,
+          2,
+          1,
+          1
+        ],
+        "elapsed_seconds_by_pair_count": [
+          0.0010183000049437396,
+          0.0009797999955480918,
+          0.000999800002318807,
+          0.0009755999999470077,
+          0.0010079000057885423,
+          0.0009819000042625703
+        ],
+        "contains_original_key": true
+      },
+      "collisions": {
+        "plaintexts_scanned": 256,
+        "keys_each": 1024,
+        "encryptions": 262144,
+        "min_distinct_ciphertexts": 238,
+        "max_distinct_ciphertexts": 240,
+        "largest_bucket_size": 12,
+        "all_plaintexts_have_collisions": true,
+        "distinct_permutations": 1024,
+        "equivalent_group_count": 0,
+        "largest_equivalence_group": 1,
+        "scan_elapsed_seconds": 0.10960760000307346,
+        "equivalence_elapsed_seconds": 0.08065400000486989,
+        "non_equivalent_collision_example": {
+          "collision_plaintext": "10011010",
+          "same_ciphertext": "00000000",
+          "key1": "0100100111",
+          "key2": "0101101111",
+          "globally_equivalent": false,
+          "distinguishing_plaintext": "00001010",
+          "key1_distinguishing_ciphertext": "00110001",
+          "key2_distinguishing_ciphertext": "10110111"
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Actual testing with another student group's independent program has not been performed; no such program/results were supplied.",
+    "GUI screenshots must be reviewed separately; computational tests do not prove GUI appearance or every interaction.",
+    "cumulative is a compatibility schedule; primary assignment conclusions use total shifts 1 and 2.",
+    "S-DES is a small teaching cipher. Independent byte mode reveals repeated bytes and is not suitable for protecting real information."
+  ]
+}
