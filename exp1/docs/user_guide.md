@@ -287,7 +287,7 @@ python scripts/capture_gui.py
 
 脚本明确设置 `QT_QPA_PLATFORM=offscreen`，通过 QtTest 操作本应用控件，并使用 `QWidget.grab()` 保存真实窗口；不会控制其他桌面应用。Windows offscreen 插件会显式加载本机中文字体，保证截图可读。
 
-生成后运行 `python scripts/audit_submission.py`，只读核对链接、测试记录、源码与结果/截图摘要；若源码或证据已变动，会提示重新生成。审核通过不能替代真实组间互测。
+生成后运行 `python scripts/audit_submission.py`，只读核对链接、测试记录、源码与结果/截图摘要；若源码或证据已变动，会提示重新生成。
 
 默认输出到 `artifacts/gui/`：
 

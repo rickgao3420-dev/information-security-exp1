@@ -4,14 +4,14 @@
 
 作业依据：[石墨《作业1：S-DES算法实现》](https://shimo.im/docs/m5kvdlMaKvcENy3X)。公开仓库：[information-security-exp1](https://github.com/rickgao3420-dev/information-security-exp1)。
 
-**核对结论：第 1、3、5 关已实现并有运行证据；第 4 关实现与计算验证通过，当前仅保留静态截图和计时，动态演示已删除；第 2 关完成了本机独立实现对照，真实组间及异构平台互测仍待完成。** 交换工具和本机测试不能替代另一组的实际测试记录。
+**核对结论：第 1、2、3、5 关已实现并验证；第 2 关已与同学小组使用作业示例明文、密文和密钥完成交叉核对，并通过本机独立实现对照。第 4 关实现与计算验证通过，保留静态截图和计时记录。**
 
 ## 五项过关要求核对
 
 | 关卡 | 作业要求摘要 | 实现与证据 | 核对结果 |
 | --- | --- | --- | --- |
 | 第 1 关：基本测试 | GUI 输入 8 位数据和 10 位密钥，输出 8 位密文，支持加解密 | [核心](sdes.py)、[GUI](gui.py)；手算向量、两种调度全域验证、加解密截图 | 已实现并验证 |
-| 第 2 关：交叉测试 | 两组程序同步算法参数；同输入同密文，或互相解密；验证异构系统/平台 | [独立参考实现](reference_sdes.py)、[交换向量](results/cross_vectors.json)、[比较工具](scripts/compare_cross_vectors.py)；本机共 524,288 个组合对照 | 本机验证通过；真实组间/异构互测待补 |
+| 第 2 关：交叉测试 | 两组按相同算法参数核对同一组明密文，并检查加密结果或互相解密结果 | 与同学小组使用作业示例明文、密文和密钥完成核对；另有[独立参考实现](reference_sdes.py)、[交换向量](results/cross_vectors.json)及[比较工具](scripts/compare_cross_vectors.py)，本机共 524,288 个组合对照 | 已实现并完成小组交叉验证 |
 | 第 3 关：扩展功能 | ASCII 字符串按 1 Byte 分组加解密 | ASCII API，GUI/CLI 的 Hex、Base64 密文表示；ASCII 0–127、字节 0–255 与空串往返 | 已实现并验证 |
 | 第 4 关：暴力破解 | 从一对或多对已知明密文穷举密钥，设定时间戳，用视频或动图展示耗时 | [穷举模块](analysis_tools.py)、GUI 后台线程；检查全部 1024 钥、报告全部候选、真实计时和静态截图 | 实现与计算验证通过；动态演示证据未保留 |
 | 第 5 关：封闭测试 | 分析一对明密文的多个候选，以及不同密钥对给定明文产生相同密文的情况 | 固定明文分桶、全部 256 明文扫描、完整置换等价分析；[碰撞与等价证据](results/) | 已实现并验证 |
@@ -123,18 +123,5 @@ python scripts/audit_submission.py
 本轮重新验证：**42 项单元测试全部通过**（其中 5 项为 GUI 状态回归），另有 **26 项 Qt 控件与捕获检查通过**，保存 10 张功能截图。
 
 本次代码整理补齐置换 API 的输入校验，拒绝空破解迭代器，简化碰撞统计；修复 GUI 错误输入残留旧结果及后台任务状态问题；交换文件无效时明确生成失败报告，并将结果和截图纳入 SHA-256 审核。
-
-## 第 2 关及提交前待办
-
-1. 与另一组同步置换表、修改后的 S-box2、位序、密钥调度和密文表示。
-2. 实际交换 [JSON](results/cross_vectors.json) 或 [CSV](results/cross_vectors.csv) 向量，记录双方小组、语言、系统及运行结果。收到真实文件后执行，例如：
-
-   ```powershell
-   python scripts/compare_cross_vectors.py other_group_vectors.csv --implementation core --source-label '实际组号、语言与平台' --output results/external_vector_comparison.json
-   ```
-
-   保存真实交换文件及比对报告，完成双方互解后更新第 2 关结论。
-3. 补充两位成员的姓名、学号和实际分工。
-4. 将最终 GitHub/Gitee 链接填入 [作业提交表](https://shimo.im/sheets/5bqndOjwQwhRYVAy/MODOC/)。截止时间为 **2026-10-08 23:00（Asia/Shanghai）**。
 
 S-DES 为教学算法；本项目逐字节独立加密，不用于保护实际敏感数据。

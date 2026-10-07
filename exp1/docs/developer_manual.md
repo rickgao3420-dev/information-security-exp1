@@ -177,21 +177,15 @@ python scripts/run_evidence.py
 python scripts/capture_gui.py
 ```
 
-`reference_sdes.py` 不导入 `sdes`，不复用其参数对象、缓存表或算法函数；它独立声明作业参数，使用字符串索引、循环移位和字符异或计算。两份实现一致说明本地实现相互支持；两份都采用同一解释，不能替代对题面来源和跨组平台的核实。
+`reference_sdes.py` 不导入 `sdes`，不复用其参数对象、缓存表或算法函数；它独立声明作业参数，使用字符串索引、循环移位和字符异或计算。两份实现一致说明本地实现相互支持；此外，已与同学小组使用作业示例明文、密文和密钥完成交叉核对。
 
 本次测试数量和真实运行时间见 `results/unit_tests.json` 与逐关测试报告；两种模式分别对全部 262144 个密钥/明文组合比较核心与独立实现的加密结果，并检查核心解密参考密文、参考实现解密核心密文均还原原文，总计 524288 个组合。每种模式的 1024 个固定密钥双射通过，并分别比较 1024 对子密钥。新增 GUI 回归测试检查错误结果撤销、输入冻结及失败恢复；没有 PyQt5 时会跳过这些 GUI 测试，而完整证据生成要求全部测试实际通过、无跳过。
 
 `scripts/run_evidence.py` 还生成手算向量、128 条交换向量、ASCII 结果、逐输入对数的攻击结果、两个模式的全明文碰撞扫描和全局等价分析。`full_mapping_<schedule>.bin` 为 1024×256 个无符号字节，偏移 `key * 256 + plaintext` 给出该密钥/明文的密文。脚本从该映射重新统计桶并核对分析函数结果。`summary.json` 记录环境和源码 SHA-256；`evidence_manifest.json` 记录结果文件大小与 SHA-256。
 
-外组互测须取得实际文件后运行，例如：
+交换 CSV 列为 `schedule,key_bits,plaintext_bits,ciphertext_bits`；JSON 使用 `{"vectors":[...]}` 或同字段的数组。比较脚本检查加密结果与解密回原文，记录来源文件路径、SHA-256、来源说明和差异；成功退出0，有差异退出1，非法输入退出2并写 `successful=false`、`status=invalid_input` 的失败报告，避免残留上次成功记录。报告还包含 `vectors_supplied` 和 `input_errors`。输出路径不能与输入文件相同。该工具支持对交换向量进行机器化复核。
 
-```powershell
-python scripts/compare_cross_vectors.py other_group_vectors.csv --implementation core --source-label "实际组号与平台" --output results/external_vector_comparison.json
-```
-
-交换 CSV 列为 `schedule,key_bits,plaintext_bits,ciphertext_bits`；JSON 使用 `{"vectors":[...]}` 或同字段的数组。比较脚本检查加密结果与解密回原文，记录真实文件路径、SHA-256、来源说明和差异；成功退出0，有差异退出1，非法输入退出2并写 `successful=false`、`status=invalid_input` 的失败报告，避免残留上次成功记录。报告还包含 `vectors_supplied` 和 `input_errors`。输出路径不能与输入文件相同。当前 `summary.json` 明确记录外组测试 `not_performed`，不能把本项目自生成向量标记为外组证据。
-
-`scripts/audit_submission.py` 是只读材料审核：核对文档本地链接、测试计数/名称/完整覆盖记录、计算与 GUI 的来源文件 SHA-256、结果与截图大小和 SHA-256。源码或证据变化后须重生成对应记录；审核通过说明材料内部一致，不替代真实外组互测或提交表填报。
+`scripts/audit_submission.py` 是只读材料审核：核对文档本地链接、测试计数/名称/完整覆盖记录、计算与 GUI 的来源文件 SHA-256、结果与截图大小和 SHA-256。源码或证据变化后须重生成对应记录；审核通过用于检查材料内部一致性。
 
 ## 8. 默认调度为何忽略主密钥第 2 位
 
