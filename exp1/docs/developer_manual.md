@@ -2,7 +2,7 @@
 
 ## 1. 模块职责和开发约定
 
-本项目采用 Python 实现。`sdes.py` 和 `analysis_tools.py` 仅依赖标准库；`gui.py` 使用 PyQt5；`scripts/capture_gui.py` 额外使用 Pillow 生成 GIF。运行证据记录的开发环境为 Windows 11、CPython 3.13.5，详细版本与解释器路径见 `results/summary.json`。
+本项目采用 Python 实现。`sdes.py` 和 `analysis_tools.py` 仅依赖标准库；`gui.py` 与 `scripts/capture_gui.py` 使用 PyQt5。运行证据记录的开发环境为 Windows 11、CPython 3.13.5，详细版本与解释器路径见 `results/summary.json`。
 
 | 文件或目录 | 职责 |
 |---|---|
@@ -14,9 +14,9 @@
 | `tests/` | 输入、算法、全空间、ASCII、攻击和交换文件验证 |
 | `scripts/run_evidence.py` | 重跑测试，生成五关计算证据、环境与哈希清单 |
 | `scripts/compare_cross_vectors.py` | 比较实际提供的外部 JSON/CSV 向量 |
-| `scripts/capture_gui.py` | 操作真实 Qt 控件，保存截图、真实进度帧和 GIF |
+| `scripts/capture_gui.py` | 操作真实 Qt 控件，保存静态截图、检查结果和真实任务计时 |
 | `results/` | 计算结果、完整映射和 SHA-256 证据清单 |
-| `artifacts/gui/` | GUI 截图、进度帧、GIF 和捕获元数据 |
+| `artifacts/gui/` | GUI 静态截图和捕获元数据 |
 
 所有位的位置从左起按 1 编号。主密钥整数范围为 `0..1023`，分组为 `0..255`。`bool` 虽然是 Python 的整数子类，仍作为无效数值拒绝。位串输出保留前导零。
 
@@ -48,7 +48,7 @@
 |---|---|
 | `parse_bits(text: str, width: int) -> int` | 严格要求恰好 width 个 `0/1`；不自动去除空白，也不接受 `0b` 前缀 |
 | `format_bits(value: int, width: int) -> str` | 校验范围并输出补齐前导零的位串 |
-| `permute(value: int, table: tuple[int,...], input_width: int) -> int` | 低层置换函数；调用者负责确保输入宽度、数值与表位置合法 |
+| `permute(value: int, table: tuple[int,...], input_width: int) -> int` | 校验输入宽度、数值与表位置；位置从1开始，可重复；空表返回0；非法输入抛出 `ValueError` |
 | `generate_subkeys(key: int, schedule='assignment') -> tuple[int,int]` | 返回整数 K1、K2，各 8 位 |
 | `encrypt_block(block: int, key: int, schedule='assignment') -> int` | 加密一个 8 位分组 |
 | `decrypt_block(block: int, key: int, schedule='assignment') -> int` | 解密一个 8 位分组 |
@@ -108,7 +108,7 @@ assert trace['output_int'] == ciphertext
 
 ### `brute_force(pairs, schedule='assignment', progress=None) -> dict`
 
-`pairs` 是非空的 `(明文整数,密文整数)` 列表；每个整数都必须是合法 8 位值。枚举 0..1023 全部密钥并保留满足所有对的密钥，结果按密钥升序。
+`pairs` 是非空的 `(明文整数,密文整数)` 可迭代对象，支持列表和生成器；输入会先完整校验并收集，空列表和空迭代器都拒绝。每个整数都必须是合法 8 位值。枚举 0..1023 全部密钥并保留满足所有对的密钥，结果按密钥升序。
 
 返回字段：`schedule`、`pairs`（每项含明密文位串与整数）、`candidate_keys`（整数列表）、`candidate_key_bits`、`candidate_count`、`tested_keys`、`total_keys`、`elapsed_seconds`、`started_at`、`finished_at`。正常完成时 `tested_keys=total_keys=1024`。
 
@@ -151,13 +151,13 @@ assert trace['output_int'] == ciphertext
 
 GUI 在调用 `parse_bits()` 前对位输入执行 `.strip()`，核心本身不剔除空白。GUI 的攻击输入每行用空白、英文/中文逗号分隔两个位串；CLI 还支持冒号分隔和 `#` 开头的注释行。CLI 接受 Hex 中的空白，Base64 采用严格校验；GUI 会先去除 Base64 输入中的空白。解析失败均明确提示，不默默丢弃字符。
 
-GUI 捕获异常并在状态栏显示错误；位串/ASCII 错误会清空相关输出，暴力破解/碰撞输入校验失败时不启动 worker，并保留此前的分析结果。CLI 通过 `argparse.parser.error()` 输出信息并以状态码 2 退出。普通成功 CLI 命令返回 0。
+GUI 捕获异常并在状态栏显示错误；位串/ASCII 错误会撤下相关旧输出及旧计数字样。暴力破解/碰撞输入校验失败时不启动 worker，清除该页的旧报告、进度和计时。后台任务失败会清除结果并显示真实结束时间和失败前耗时；线程结束后恢复输入与按钮。CLI 通过 `argparse.parser.error()` 输出信息并以状态码 2 退出。普通成功 CLI 命令返回 0。
 
 ## 6. Qt 后台任务与信号
 
 `SDESWindow` 提供位串、ASCII、暴力破解、密钥碰撞四个页签。位串和 ASCII 运算直接调用公共 API；暴力破解和固定明文碰撞使用 `AnalysisWorker(QThread)`。
 
-开始任务前，主线程校验并取得输入快照，锁定密钥输入、调度选择和操作按钮，创建带 `kind/payload/schedule` 的 worker。已有 worker 时拒绝启动第二个分析任务。worker 只计算与发信号，不直接修改控件。
+开始任务前，主线程校验并取得输入快照，锁定所有操作输入、密文格式、调度选择和操作按钮，创建带 `kind/payload/schedule` 的 worker。已有 worker 时拒绝启动第二个分析任务，并保留当前运行状态。worker 只计算与发信号，不直接修改控件。
 
 `AnalysisWorker` 的信号为 `progress(int,int,object,float)`、`completed(object)`、`failed(str)`。暴力攻击仍真实检查全部密钥，但只有每 32 个检查点及终点向 GUI 发出进度信号，避免事件排队过多；不添加人为 sleep。碰撞任务没有逐钥进度条，只显示执行状态与完成结果。
 
@@ -165,7 +165,7 @@ GUI 捕获异常并在状态栏显示错误；位串/ASCII 错误会清空相关
 
 worker 的 `finished` 信号恢复控件、清除 `self.worker` 并 `deleteLater()`。窗口关闭时若 worker 仍运行，`closeEvent()` 等待其结束，避免 QThread 随窗口销毁。当前实现没有取消按钮；分析任务规模有限。
 
-窗口还发出 `taskStarted`、`taskProgress`、`taskCompleted`、`taskFailed` 信号，供截图脚本在真实事件发生时捕获证据。GIF 帧的阅读停留时间与实际计算耗时分别记录；播放时长不能作为暴力破解耗时。
+窗口还发出 `taskStarted`、`taskProgress`、`taskCompleted`、`taskFailed` 信号，供截图脚本记录真实任务事件并验证完成结果。当前只保存静态截图和计时；动态演示已删除，第 4 关要求的视频或动图提交证据未保留。
 
 ## 7. 独立验证和证据复现
 
@@ -179,7 +179,7 @@ python scripts/capture_gui.py
 
 `reference_sdes.py` 不导入 `sdes`，不复用其参数对象、缓存表或算法函数；它独立声明作业参数，使用字符串索引、循环移位和字符异或计算。两份实现一致说明本地实现相互支持；两份都采用同一解释，不能替代对题面来源和跨组平台的核实。
 
-`results/summary.json` 的本次持久证据记录：29 项测试通过，0 失败/错误；两种模式分别对全部 262144 个密钥/明文组合比较核心与独立实现的加密结果，并检查核心解密参考密文、参考实现解密核心密文均还原原文，总计 524288 个组合。每种模式的 1024 个固定密钥双射通过，并分别比较 1024 对子密钥。
+本次测试数量和真实运行时间见 `results/unit_tests.json` 与逐关测试报告；两种模式分别对全部 262144 个密钥/明文组合比较核心与独立实现的加密结果，并检查核心解密参考密文、参考实现解密核心密文均还原原文，总计 524288 个组合。每种模式的 1024 个固定密钥双射通过，并分别比较 1024 对子密钥。新增 GUI 回归测试检查错误结果撤销、输入冻结及失败恢复；没有 PyQt5 时会跳过这些 GUI 测试，而完整证据生成要求全部测试实际通过、无跳过。
 
 `scripts/run_evidence.py` 还生成手算向量、128 条交换向量、ASCII 结果、逐输入对数的攻击结果、两个模式的全明文碰撞扫描和全局等价分析。`full_mapping_<schedule>.bin` 为 1024×256 个无符号字节，偏移 `key * 256 + plaintext` 给出该密钥/明文的密文。脚本从该映射重新统计桶并核对分析函数结果。`summary.json` 记录环境和源码 SHA-256；`evidence_manifest.json` 记录结果文件大小与 SHA-256。
 
@@ -189,7 +189,9 @@ python scripts/capture_gui.py
 python scripts/compare_cross_vectors.py other_group_vectors.csv --implementation core --source-label "实际组号与平台" --output results/external_vector_comparison.json
 ```
 
-交换 CSV 列为 `schedule,key_bits,plaintext_bits,ciphertext_bits`；JSON 使用 `{"vectors":[...]}` 或同字段的数组。比较脚本检查加密结果与解密回原文，记录真实文件路径、SHA-256、来源说明和差异；有差异时退出 1。当前 `summary.json` 明确记录外组测试 `not_performed`，不能把本项目自生成向量标记为外组证据。
+交换 CSV 列为 `schedule,key_bits,plaintext_bits,ciphertext_bits`；JSON 使用 `{"vectors":[...]}` 或同字段的数组。比较脚本检查加密结果与解密回原文，记录真实文件路径、SHA-256、来源说明和差异；成功退出0，有差异退出1，非法输入退出2并写 `successful=false`、`status=invalid_input` 的失败报告，避免残留上次成功记录。报告还包含 `vectors_supplied` 和 `input_errors`。输出路径不能与输入文件相同。当前 `summary.json` 明确记录外组测试 `not_performed`，不能把本项目自生成向量标记为外组证据。
+
+`scripts/audit_submission.py` 是只读材料审核：核对文档本地链接、测试计数/名称/完整覆盖记录、计算与 GUI 的来源文件 SHA-256、结果与截图大小和 SHA-256。源码或证据变化后须重生成对应记录；审核通过说明材料内部一致，不替代真实外组互测或提交表填报。
 
 ## 8. 默认调度为何忽略主密钥第 2 位
 

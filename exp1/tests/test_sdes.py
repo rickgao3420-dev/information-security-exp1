@@ -72,6 +72,26 @@ class InputValidationTests(unittest.TestCase):
             with self.subTest(width=width), self.assertRaises(ValueError):
                 sdes.format_bits(0, width)
 
+    def test_permutation_validates_values_widths_and_positions(self):
+        self.assertEqual(sdes.permute(0b1001, sdes.EP, 4), 0b11000011)
+        self.assertEqual(sdes.permute(0b1001, (), 4), 0)
+        for value in (-1, 16, True, 1.0, None):
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                sdes.permute(value, (1,), 4)
+        for width in (0, -1, True, 1.5, "4"):
+            with self.subTest(width=width), self.assertRaises(ValueError):
+                sdes.permute(0, (1,), width)
+        for table in ((0,), (5,), (True,), (1.0,), ("1",), "1", None, 1):
+            with self.subTest(table=table), self.assertRaises(ValueError):
+                sdes.permute(0, table, 4)
+
+    def test_trace_rejects_non_boolean_decrypt_flags(self):
+        for decrypt in (0, 1, "false", None, []):
+            with self.subTest(decrypt=decrypt), self.assertRaises(ValueError):
+                sdes.trace_block(HAND_PLAIN, HAND_KEY, decrypt=decrypt)
+            with self.subTest(decrypt=decrypt), self.assertRaises(ValueError):
+                reference.trace_bits(f"{HAND_PLAIN:08b}", f"{HAND_KEY:010b}", decrypt=decrypt)
+
     def test_invalid_keys(self):
         for key in (-1, 1024, True, 1.0, "1010000010", None):
             for function in (sdes.generate_subkeys,):
@@ -143,18 +163,6 @@ class CrossImplementationTests(unittest.TestCase):
         for schedule in HAND_EXPECTED:
             for key in range(1024):
                 self.assertEqual(sdes.generate_subkeys(key, schedule), reference.generate_subkeys(key, schedule))
-
-    def test_cumulative_cross_implementation_samples(self):
-        blocks = (0, 1, 2, 3, 15, 16, 31, 32, 64, 127, 128, 154, 170, 192, 254, 255)
-        for key in range(1024):
-            subkeys = reference.generate_subkeys_bits(f"{key:010b}", "cumulative")
-            for block in blocks:
-                expected_bits = reference.crypt_with_subkeys_bits(f"{block:08b}", subkeys)
-                cipher = sdes.encrypt_block(block, key, "cumulative")
-                self.assertEqual(cipher, int(expected_bits, 2))
-                self.assertEqual(sdes.decrypt_block(cipher, key, "cumulative"), block)
-                self.assertEqual(reference.crypt_with_subkeys_bits(expected_bits, subkeys[::-1]), f"{block:08b}")
-
 
 class ExhaustiveDomainTests(unittest.TestCase):
     def test_both_schedules_all_keys_all_blocks_and_bijections(self):

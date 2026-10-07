@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-10-07T22:36:59.045+08:00",
+  "created_at": "2026-10-07T23:44:46.714+08:00",
   "generator": "scripts/run_evidence.py",
   "files": {
     "ascii_vectors.json": {
@@ -7,20 +7,20 @@
       "sha256": "0d657d54d8fa784e9726e6264eb6c7c15ef2dffe2095eb80d50196c4f8153bb1"
     },
     "brute_force_assignment.json": {
-      "size_bytes": 8580,
-      "sha256": "215541e7f7ad7fb53d59eb1c0a522ab6dd7f19240d24df7eb18fafa2353f34a8"
+      "size_bytes": 8582,
+      "sha256": "ca39ad37b9c6bbf99e63619771cf1ce8a770caaabadf4785ec8066f0f3d48bf3"
     },
     "brute_force_cumulative.json": {
-      "size_bytes": 8434,
-      "sha256": "a6ecf6820010c41cfdae74aee7d42351deabae56b11d5524e683031a4ec4484b"
+      "size_bytes": 8433,
+      "sha256": "7448915afc6f909ad5bdc85e9dcbeb8d8d1c92f52777069536388782abac635d"
     },
     "collision_buckets_assignment.json": {
-      "size_bytes": 107501,
-      "sha256": "97e23d30f2723311821267c80a612b56d29c3359f74ca8835bb77e68bfb7a32c"
+      "size_bytes": 107502,
+      "sha256": "b099b6afbbeab175b5d353bc4314feb18052db374a75b90c682c1f3213dc8735"
     },
     "collision_buckets_cumulative.json": {
       "size_bytes": 104959,
-      "sha256": "ed55b8a429847c150b8ecf84b2da601b2fe5f8194a724a26381f392484e40bfc"
+      "sha256": "bf266d9cd517f84b6c7751201b875c5436436e0d11b48099d95ed51124b6a4d5"
     },
     "collision_examples_assignment.json": {
       "size_bytes": 1250,
@@ -35,8 +35,8 @@
       "sha256": "7db119af42169e91eae0b3e85e420b21e62f5601cd0c3311285be4e16b0f0fd7"
     },
     "collision_scan_assignment.json": {
-      "size_bytes": 128312,
-      "sha256": "c479976668e6359f8cbbabeb6a6345a0e6e624a12f6f8b8c5d4541cdb7f37496"
+      "size_bytes": 128313,
+      "sha256": "080e2598ee4888cd9156204a41a8c6b043831f8a6c8256debcca2fcf0ea01605"
     },
     "collision_scan_cumulative.csv": {
       "size_bytes": 8980,
@@ -44,7 +44,7 @@
     },
     "collision_scan_cumulative.json": {
       "size_bytes": 159546,
-      "sha256": "b24e29d5d80137bd53913227be5a4176594f9cd8fc0b361e6bc3606514e99cc5"
+      "sha256": "9e848295582b02b995b45c1e84dacf822704f02c6e9a0b1f91261bef3a8beb51"
     },
     "cross_vectors.csv": {
       "size_bytes": 7618,
@@ -56,11 +56,11 @@
     },
     "equivalent_keys_assignment.json": {
       "size_bytes": 167200,
-      "sha256": "6e4c1529b032602c1a076be7232f2bc38d114d0f300bc2acf2cd108b4ac86f8a"
+      "sha256": "0a49fdbcc545b1efefa31bf1ff9e6422a689aaa8bdae925c05d3472c42aae2bf"
     },
     "equivalent_keys_cumulative.json": {
       "size_bytes": 129391,
-      "sha256": "14f489351a3d23f4ceb4b4f1a482264ca13e123fbc0151563c90c0a22164f47f"
+      "sha256": "81b3832cb3414bd0547da76e5370fd2b39d572de46e520f29617c817c85b4255"
     },
     "full_mapping_assignment.bin": {
       "size_bytes": 262144,
@@ -75,16 +75,16 @@
       "sha256": "dedbf00730c4766cf4db8706371b20c0d6f33fbfc82cff274a3245cd4a8497a8"
     },
     "summary.json": {
-      "size_bytes": 11443,
-      "sha256": "b2acefc9570c069fb4b2a93fed332b474703c9280e3a4a6c2a64a7fb3ff4fdbc"
+      "size_bytes": 13331,
+      "sha256": "a5ee686fdb47acdee6cc690fb996b22e7d914c930d08562fb48ec84ba003cc33"
     },
     "unit_tests.json": {
-      "size_bytes": 3431,
-      "sha256": "6b1ad39ae9d1176ad3ec907adeeebe283c585b6782afeea24d749c4fd52973f6"
+      "size_bytes": 4643,
+      "sha256": "f2ff28b31bdd0161b4593e73a851c4e385e7ce22e53ef5e9521221a1313b8229"
     },
     "unit_tests.txt": {
-      "size_bytes": 3558,
-      "sha256": "3c897890864ae003ccbbe56f2b65313938127ca849cad1256a94f7113cff6c3c"
+      "size_bytes": 5572,
+      "sha256": "26b33f700b403f3cef756fc8d762e71c3e1cbe5472fbcd27f40872c8e38a1b4a"
     }
   }
 }

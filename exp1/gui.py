@@ -11,10 +11,10 @@ from datetime import datetime
 from pathlib import Path
 from typing import Callable
 
-from PyQt5.QtCore import Qt, QThread, pyqtSignal
+from PyQt5.QtCore import QThread, pyqtSignal
 from PyQt5.QtGui import QFont, QFontDatabase
 from PyQt5.QtWidgets import (
-    QApplication, QComboBox, QFormLayout, QGridLayout, QHBoxLayout, QLabel,
+    QApplication, QComboBox, QHBoxLayout, QLabel,
     QLineEdit, QMainWindow, QPlainTextEdit, QProgressBar, QPushButton,
     QTabWidget, QVBoxLayout, QWidget,
 )
@@ -49,6 +49,8 @@ class AnalysisWorker(QThread):
         self.payload = payload
         self.schedule = schedule
         self.started_at = ""
+        self.finished_at = ""
+        self.elapsed_seconds = 0.0
 
     def run(self):
         self.started_at = datetime.now().astimezone().isoformat(timespec="milliseconds")
@@ -68,18 +70,21 @@ class AnalysisWorker(QThread):
                 result = analysis.collision_analysis(
                     self.payload, schedule=self.schedule,
                 )
-            finished_at = datetime.now().astimezone().isoformat(timespec="milliseconds")
+            self.finished_at = datetime.now().astimezone().isoformat(timespec="milliseconds")
+            self.elapsed_seconds = time.perf_counter() - started
             measured = {
                 "kind": self.kind,
                 "schedule": self.schedule,
                 "started_at": result.get("started_at", self.started_at),
-                "finished_at": result.get("finished_at", finished_at),
-                "elapsed_seconds": result.get("elapsed_seconds", time.perf_counter() - started),
-                "worker_elapsed_seconds": time.perf_counter() - started,
+                "finished_at": result.get("finished_at", self.finished_at),
+                "elapsed_seconds": result.get("elapsed_seconds", self.elapsed_seconds),
+                "worker_elapsed_seconds": self.elapsed_seconds,
                 "result": result,
             }
             self.completed.emit(measured)
         except Exception as error:
+            self.finished_at = datetime.now().astimezone().isoformat(timespec="milliseconds")
+            self.elapsed_seconds = time.perf_counter() - started
             self.failed.emit(str(error))
 
 
@@ -144,7 +149,12 @@ class SDESWindow(QMainWindow):
         self.status_label.setWordWrap(True)
         self.status_label.setMinimumHeight(28)
         layout.addWidget(self.status_label)
-        self._action_controls.extend([self.key_input, self.schedule_combo])
+        # 计算期间冻结输入，防止报告对应旧输入、界面却显示新输入。
+        self._action_controls.extend([
+            self.key_input, self.schedule_combo, self.bits_input,
+            self.cipher_format, self.ascii_input, self.ascii_cipher,
+            self.pairs_input, self.collision_input,
+        ])
         self.setStyleSheet("""
             QMainWindow { background: #f3f6fb; }
             QTabWidget::pane { border: 1px solid #cbd5e1; background: white; }
@@ -366,6 +376,7 @@ class SDESWindow(QMainWindow):
         except Exception as error:
             self.ascii_cipher.clear()
             self.ascii_output.clear()
+            self.ascii_count.setText("加密失败；请修正输入后重试。")
             self._status(str(error), True)
 
     def _ascii_decrypt(self):
@@ -382,9 +393,13 @@ class SDESWindow(QMainWindow):
             self._status("ASCII 解密完成。")
         except Exception as error:
             self.ascii_output.clear()
+            self.ascii_count.setText("解密失败；请检查密文、表示方式与密钥。")
             self._status(str(error), True)
 
     def _start_brute(self):
+        if self.worker is not None:
+            self._status("已有计算正在运行，请等待完成。", True)
+            return
         try:
             core = importlib.import_module("sdes")
             pairs = []
@@ -402,9 +417,13 @@ class SDESWindow(QMainWindow):
             self.brute_output.clear()
             self._launch_analysis("brute", pairs)
         except Exception as error:
+            self._clear_analysis_result("brute")
             self._status(str(error), True)
 
     def _start_collision(self):
+        if self.worker is not None:
+            self._status("已有计算正在运行，请等待完成。", True)
+            return
         try:
             core = importlib.import_module("sdes")
             plaintext = core.parse_bits(self.collision_input.text().strip(), 8)
@@ -412,7 +431,21 @@ class SDESWindow(QMainWindow):
             self.collision_summary.setText("正在计算全部 1024 个密钥……")
             self._launch_analysis("collision", plaintext)
         except Exception as error:
+            self._clear_analysis_result("collision")
             self._status(str(error), True)
+
+    def _clear_analysis_result(self, kind: str):
+        """拒绝新输入时撤下旧结果，避免把旧报告当成这次的输出。"""
+        self.last_task = None
+        if kind == "brute":
+            self.brute_output.clear()
+            self.brute_progress.setValue(0)
+            self.brute_summary.setText("输入无效；请修正明密文对后重试。")
+            self.brute_timing.setText("开始时间：—\n结束时间：—\n实测耗时：—")
+        else:
+            self.collision_output.clear()
+            self.collision_summary.setText("输入无效；请修正固定明文后重试。")
+            self.collision_timing.setText("开始时间：—\n结束时间：—\n实测耗时：—")
 
     def _launch_analysis(self, kind: str, payload: object):
         if self.worker is not None:
@@ -500,7 +533,19 @@ class SDESWindow(QMainWindow):
         self.taskCompleted.emit(kind, report)
 
     def _on_failed(self, error: str):
-        kind = self.worker.kind if self.worker is not None else "unknown"
+        worker = self.worker
+        kind = worker.kind if worker is not None else "unknown"
+        self.last_task = None
+        if kind in ("brute", "collision"):
+            output = self.brute_output if kind == "brute" else self.collision_output
+            summary = self.brute_summary if kind == "brute" else self.collision_summary
+            timing = self.brute_timing if kind == "brute" else self.collision_timing
+            output.clear()
+            summary.setText("计算失败；请修正问题后重试。")
+            timing.setText(
+                f"开始时间：{worker.started_at}\n结束时间：{worker.finished_at}\n"
+                f"失败前实测耗时：{worker.elapsed_seconds:.9f} 秒"
+            )
         self._status(error, True)
         self.taskFailed.emit(kind, error)
 

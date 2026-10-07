@@ -1,0 +1,6 @@
+* text=auto eol=lf
+# 证据摘要依赖文件的实际字节，保存计算记录时不转换换行符。
+/exp1/results/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/exp1/artifacts/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+*.png binary
+*.bin binary

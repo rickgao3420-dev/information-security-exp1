@@ -1,12 +1,13 @@
-"""在 offscreen 模式测试本应用控件并保存真实窗口截图与进度 GIF。
+"""在 offscreen 模式测试本应用控件并保存真实窗口截图与进度记录。
 
 运行：python scripts/capture_gui.py
-所有动画帧来自本应用 QWidget.grab；GIF 阅读停留不代表算法耗时。
+窗口截图来自本应用 QWidget.grab；进度和计时来自真实 worker 信号。
 """
 
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import sys
@@ -18,7 +19,6 @@ os.environ["QT_QPA_PLATFORM"] = "offscreen"
 PROJECT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT))
 
-from PIL import Image, ImageDraw, ImageFont
 from PyQt5.QtCore import Qt
 from PyQt5.QtTest import QTest
 from PyQt5.QtWidgets import QApplication, QPushButton
@@ -37,8 +37,6 @@ def main() -> int:
     args = parser.parse_args()
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=True)
-    frames_dir = output / "brute_frames"
-    frames_dir.mkdir(exist_ok=True)
     app = QApplication.instance() or QApplication([])
     configure_application_fonts(app)
     window = SDESWindow()
@@ -46,8 +44,8 @@ def main() -> int:
     app.processEvents()
     tests = []
     screenshots = []
-    frame_metadata = []
-    animation_frames = []
+    screenshot_files = []
+    progress_events = []
 
     def record(name: str, condition: bool, details: object = None):
         tests.append({"name": name, "passed": bool(condition), "details": details})
@@ -59,7 +57,8 @@ def main() -> int:
         path = output / name
         if not window.grab().save(str(path), "PNG"):
             raise RuntimeError("无法保存截图：" + str(path))
-        screenshots.append(str(path.relative_to(PROJECT)) if path.is_relative_to(PROJECT) else str(path))
+        screenshots.append(path.relative_to(PROJECT).as_posix() if path.is_relative_to(PROJECT) else str(path))
+        screenshot_files.append(path)
         return path
 
     def click(button):
@@ -85,39 +84,21 @@ def main() -> int:
         record("worker 成功返回", window.last_task is not None, window.status_label.text())
         return window.last_task
 
-    def image_font(size: int):
-        for candidate in ("C:/Windows/Fonts/msyh.ttc", "C:/Windows/Fonts/simhei.ttf", "C:/Windows/Fonts/arial.ttf"):
-            if Path(candidate).exists():
-                return ImageFont.truetype(candidate, size)
-        return ImageFont.load_default()
-
-    footer_font = image_font(17)
-    footer_small = image_font(15)
-
-    def frame(state: str, done: int, total: int, candidates: object, elapsed: float, report=None):
-        captured_at = timestamp()
-        path = frames_dir / f"frame_{len(frame_metadata):03d}.png"
-        window.grab().save(str(path), "PNG")
-        with Image.open(path) as source:
-            source = source.convert("RGB")
-            canvas = Image.new("RGB", (source.width, source.height + 116), "#173451")
-            canvas.paste(source, (0, 0))
-        draw = ImageDraw.Draw(canvas)
-        y = source.height + 8
-        draw.text((16, y), f"真实 GUI · {state} · 已检查 {done}/{total} 个密钥 · 候选 {candidates}", fill="white", font=footer_font)
-        if report:
-            timing = f"开始 {report['started_at']} | 结束 {report['finished_at']} | 实测 {report['elapsed_seconds']:.9f} 秒"
-        else:
-            timing = f"真实进度信号耗时 {elapsed:.9f} 秒 | 本帧捕获时间 {captured_at}"
-        draw.text((16, y + 29), timing, fill="#dceafe", font=footer_small)
-        draw.text((16, y + 57), "GIF 每帧停留供阅读，播放时长不等于破解耗时。无人工计算延时。", fill="#ffe5a1", font=footer_font)
-        draw.text((16, y + 85), "进度与候选数来自真实 worker 信号；计时来自 perf_counter 和本机时钟。", fill="#dceafe", font=footer_small)
-        animation_frames.append(canvas)
-        frame_metadata.append({
+    def progress_event(state: str, done: int, total: int, candidates: object,
+                       elapsed: float, metadata=None, report=None):
+        event = {
             "state": state, "done": done, "total": total, "candidates": candidates,
-            "signal_elapsed_seconds": elapsed, "captured_at": captured_at,
-            "screenshot": str(path.relative_to(output)),
-        })
+            "signal_elapsed_seconds": elapsed, "observed_at": timestamp(),
+        }
+        if metadata is not None:
+            event["submission"] = metadata
+        if report is not None:
+            event.update({
+                "started_at": report["started_at"],
+                "finished_at": report["finished_at"],
+                "elapsed_seconds": report["elapsed_seconds"],
+            })
+        progress_events.append(event)
 
     key = parse_bits("1010000010", 10)
     plaintext = parse_bits("10101010", 8)
@@ -151,15 +132,16 @@ def main() -> int:
 
     def on_started(kind, metadata):
         if kind == "brute":
-            frame("提交并开始", 0, 1024, 0, 0.0)
+            progress_event("started", 0, 1024, 0, 0.0, metadata=metadata)
 
     def on_progress(kind, done, total, candidates, elapsed):
         if kind == "brute":
-            frame("真实检查进度", done, total, candidates, elapsed)
+            progress_event("progress", done, total, candidates, elapsed)
 
     def on_completed(kind, report):
         if kind == "brute":
-            frame("实际破解完成", 1024, 1024, report["result"]["candidate_count"], report["elapsed_seconds"], report)
+            progress_event("completed", 1024, 1024, report["result"]["candidate_count"],
+                           report["elapsed_seconds"], report=report)
 
     window.taskStarted.connect(on_started)
     window.taskProgress.connect(on_progress)
@@ -233,39 +215,33 @@ def main() -> int:
     record("课件模式位串往返", window.bits_output.text() == "10101010")
     shot("10_cumulative_mode.png")
 
-    durations = [200] * len(animation_frames)
-    durations[0] = 1600
-    durations[-1] = 4500
-    gif_path = output / "brute_force_actual.gif"
-    animation_frames[0].save(
-        gif_path, format="GIF", save_all=True,
-        append_images=animation_frames[1:], duration=durations, loop=0,
-        optimize=False, disposal=2,
-    )
-    animation_frames[0].save(output / "brute_animation_start.png")
-    animation_frames[-1].save(output / "brute_animation_end.png")
     manifest = {
+        "schema": "sdes-gui-evidence-v3",
         "captured_at": timestamp(), "platform": os.environ["QT_QPA_PLATFORM"],
         "window_size": [window.width(), window.height()],
         "tests": tests, "screenshots": screenshots,
+        "source_sha256": {
+            name: hashlib.sha256((PROJECT / name).read_bytes()).hexdigest()
+            for name in ("gui.py", "sdes.py", "analysis_tools.py", "scripts/capture_gui.py", "requirements.txt")
+        },
+        "files": {
+            path.relative_to(output).as_posix(): {
+                "size_bytes": path.stat().st_size,
+                "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+            }
+            for path in sorted(screenshot_files)
+        },
         "brute_force": brute_report, "multiple_pairs": multi_report,
         "collision_statistics": collision_report["result"]["statistics"],
-        "gif": {
-            "path": str(gif_path), "frame_count": len(animation_frames),
-            "playback_duration_seconds": sum(durations) / 1000,
-            "actual_computation_seconds": brute_report["elapsed_seconds"],
-            "note": "真实窗口截图和真实 worker 进度信号。GIF 停留供阅读，播放时长不等于实测破解耗时；计算未插入人为 sleep。",
-            "frames": frame_metadata,
-        },
+        "progress_events": progress_events,
     }
     manifest_path = output / "capture_manifest.json"
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
     window.close()
     print(json.dumps({
         "passed_tests": len(tests), "screenshots": len(screenshots),
-        "gif_frames": len(animation_frames),
+        "progress_events": len(progress_events),
         "actual_brute_seconds": brute_report["elapsed_seconds"],
-        "gif_playback_seconds": sum(durations) / 1000,
         "manifest": str(manifest_path),
     }, ensure_ascii=False, indent=2))
     return 0

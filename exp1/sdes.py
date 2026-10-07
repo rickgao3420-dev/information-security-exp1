@@ -57,9 +57,22 @@ def format_bits(value: int, width: int) -> str:
 
 
 def permute(value: int, table: tuple[int, ...], input_width: int) -> int:
-    """位置表从左侧第 1 位开始编号；输出位依次取 table 指定的位。"""
+    """按从左侧第 1 位编号的位置表取位；位置可重复，用于扩展置换。
+
+    数值必须适合输入位宽，表中每个位置必须在 1..input_width 内。
+    空表返回 0；错误数值、位宽或位置表统一抛出 ValueError。
+    """
+    _check_width(input_width)
+    _check_value(value, input_width)
+    try:
+        positions = tuple(table)
+    except TypeError as error:
+        raise ValueError("位置表必须是整数位置的可迭代对象。") from error
+    if any(not isinstance(position, int) or isinstance(position, bool)
+           or not 1 <= position <= input_width for position in positions):
+        raise ValueError(f"位置表只能包含 1 到 {input_width} 之间的整数。")
     result = 0
-    for position in table:
+    for position in positions:
         result = (result << 1) | ((value >> (input_width - position)) & 1)
     return result
 

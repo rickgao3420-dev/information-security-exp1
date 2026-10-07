@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from collections import defaultdict
+from collections import Counter, defaultdict
+from collections.abc import Iterable
 from datetime import datetime
 from time import perf_counter
 from typing import Any, Callable
@@ -24,7 +25,7 @@ def _validate_schedule(schedule: str) -> None:
     generate_subkeys(0, schedule)
 
 
-def brute_force(pairs: list[tuple[int, int]], schedule: str = "assignment",
+def brute_force(pairs: Iterable[tuple[int, int]], schedule: str = "assignment",
                 progress: Progress | None = None) -> dict[str, Any]:
     """枚举全部 1024 个密钥，保留同时满足所有明密文对的全部候选。
 
@@ -33,16 +34,21 @@ def brute_force(pairs: list[tuple[int, int]], schedule: str = "assignment",
     及每个密钥检查结束时调用，GUI 可据此更新进度或主动取消。
     """
     _validate_schedule(schedule)
-    if not pairs:
-        raise ValueError("至少需要一组已知的 8 位明文和密文。")
     checked_pairs = []
-    for pair in pairs:
+    try:
+        pair_iterator = iter(pairs)
+    except TypeError as error:
+        raise ValueError("输入必须是 (明文整数, 密文整数) 对的可迭代对象。") from error
+    for pair in pair_iterator:
         if not isinstance(pair, (tuple, list)) or len(pair) != 2:
             raise ValueError("每组输入必须是 (明文整数, 密文整数)。")
         plaintext, ciphertext = pair
         format_bits(plaintext, 8)
         format_bits(ciphertext, 8)
         checked_pairs.append((plaintext, ciphertext))
+    # 迭代器本身始终为真，必须检查收集后的数据，避免空输入匹配全部密钥。
+    if not checked_pairs:
+        raise ValueError("至少需要一组已知的 8 位明文和密文。")
     started_at = _timestamp()
     start = perf_counter()
     candidates = []
@@ -64,8 +70,10 @@ def brute_force(pairs: list[tuple[int, int]], schedule: str = "assignment",
     }
 
 
-def _bucket_summary(buckets: dict[int, list[int]]) -> dict[str, Any]:
-    counts = [len(keys) for keys in buckets.values()]
+def _bucket_summary(bucket_sizes: Iterable[int]) -> dict[str, Any]:
+    """只按桶大小统计；全明文扫描不必为每个桶保留全部密钥。"""
+    counts = list(bucket_sizes)
+    histogram = Counter(counts)
     return {
         "distinct_ciphertexts": len(counts), "nonempty_buckets": len(counts),
         "empty_buckets": 256 - len(counts), "min_bucket_size": min(counts),
@@ -73,7 +81,7 @@ def _bucket_summary(buckets: dict[int, list[int]]) -> dict[str, Any]:
         "collision_buckets": sum(count > 1 for count in counts),
         "keys_in_collision_buckets": sum(count for count in counts if count > 1),
         "collision_key_pairs": sum(count * (count - 1) // 2 for count in counts),
-        "bucket_size_histogram": {str(size): counts.count(size) for size in sorted(set(counts))},
+        "bucket_size_histogram": {str(size): histogram[size] for size in sorted(histogram)},
     }
 
 
@@ -96,7 +104,7 @@ def collision_analysis(plaintext: int, schedule: str = "assignment") -> dict[str
         "plaintext": format_bits(plaintext, 8), "plaintext_int": plaintext, "schedule": schedule,
         "total_keys": TOTAL_KEYS, "groups": groups,
         "ciphertext_groups": {group["ciphertext"]: group["key_bits"] for group in groups},
-        "collision_examples": examples, "statistics": _bucket_summary(buckets),
+        "collision_examples": examples, "statistics": _bucket_summary(len(keys) for keys in buckets.values()),
         "elapsed_seconds": perf_counter() - start, "started_at": started_at, "finished_at": _timestamp(),
     }
 
@@ -108,16 +116,17 @@ def scan_all_plaintexts(schedule: str = "assignment", progress: Progress | None 
     start = perf_counter()
     subkeys = [generate_subkeys(key, schedule) for key in range(TOTAL_KEYS)]
     summaries = []
+    collision_plaintexts = 0
     if progress is not None:
         progress(0, 256, 0, 0.0)
     for plaintext in range(256):
-        buckets: dict[int, list[int]] = defaultdict(list)
-        for key, (first, second) in enumerate(subkeys):
-            buckets[_crypt_with_subkeys(plaintext, first, second)].append(key)
+        bucket_sizes = Counter(_crypt_with_subkeys(plaintext, first, second) for first, second in subkeys)
+        summary = _bucket_summary(bucket_sizes.values())
         summaries.append({"plaintext": format_bits(plaintext, 8), "plaintext_int": plaintext,
-                          **_bucket_summary(buckets)})
+                          **summary})
+        collision_plaintexts += summary["collision_buckets"] > 0
         if progress is not None:
-            progress(plaintext + 1, 256, sum(s["collision_buckets"] > 0 for s in summaries), perf_counter() - start)
+            progress(plaintext + 1, 256, collision_plaintexts, perf_counter() - start)
     return {
         "schedule": schedule, "total_plaintexts": 256, "total_keys": TOTAL_KEYS,
         "encryptions": 256 * TOTAL_KEYS, "plaintexts": summaries,

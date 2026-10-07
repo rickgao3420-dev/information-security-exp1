@@ -6601,7 +6601,7 @@
   "min_distinct_ciphertexts": 238,
   "max_distinct_ciphertexts": 240,
   "largest_bucket_size": 12,
-  "elapsed_seconds": 0.10960760000307346,
-  "started_at": "2026-10-07T22:36:58.286+08:00",
-  "finished_at": "2026-10-07T22:36:58.396+08:00"
+  "elapsed_seconds": 0.09905699999944773,
+  "started_at": "2026-10-07T23:44:46.005+08:00",
+  "finished_at": "2026-10-07T23:44:46.104+08:00"
 }

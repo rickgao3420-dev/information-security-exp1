@@ -50,6 +50,13 @@ def sha256(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def source_hashes():
+    """Record every executable project module/test, including new test files."""
+    files = [*ROOT.glob("*.py"), *(ROOT / "scripts").glob("*.py"), *(ROOT / "tests").glob("*.py")]
+    files.append(ROOT / "requirements.txt")
+    return {path.relative_to(ROOT).as_posix(): sha256(path) for path in sorted(files)}
+
+
 def run_tests(out):
     suite = unittest.defaultTestLoader.discover(str(ROOT / "tests"), top_level_dir=str(ROOT))
     def names_in(collection):
@@ -58,6 +65,9 @@ def run_tests(out):
             names.extend(names_in(item) if isinstance(item, unittest.TestSuite) else [item.id()])
         return names
     test_names = names_in(suite)
+    exhaustive_test = "tests.test_sdes.ExhaustiveDomainTests.test_both_schedules_all_keys_all_blocks_and_bijections"
+    if exhaustive_test not in test_names:
+        raise RuntimeError("The full-domain test must be discovered before claiming exhaustive coverage")
     log = io.StringIO()
     started_at = timestamp()
     start = perf_counter()
@@ -70,7 +80,7 @@ def run_tests(out):
         "skipped": len(result.skipped), "successful": result.wasSuccessful(),
         "test_names": test_names,
         "failed_or_error_test_names": [test.id() for test, _ in result.failures + result.errors],
-        "exhaustive_test": "tests.test_sdes.ExhaustiveDomainTests.test_both_schedules_all_keys_all_blocks_and_bijections",
+        "exhaustive_test": exhaustive_test,
         "assignment_encryptions_compared": 1024 * 256,
         "assignment_core_round_trips": 1024 * 256,
         "assignment_reference_round_trips": 1024 * 256,
@@ -79,7 +89,6 @@ def run_tests(out):
         "cumulative_core_round_trips": 1024 * 256,
         "cumulative_reference_round_trips": 1024 * 256,
         "cumulative_bijections_verified": 1024,
-        "cumulative_additional_sample_encryptions_compared": 1024 * 16,
         "total_exhaustive_encryptions_compared": 2 * 1024 * 256,
         "total_exhaustive_core_round_trips": 2 * 1024 * 256,
         "total_exhaustive_reference_round_trips": 2 * 1024 * 256,
@@ -88,9 +97,9 @@ def run_tests(out):
     }
     write_json(out / "unit_tests.json", summary)
     print(f"unittest: {result.testsRun} tests, success={result.wasSuccessful()}, {elapsed:.6f}s", flush=True)
-    if not result.wasSuccessful():
+    if not result.wasSuccessful() or result.skipped:
         print(log.getvalue(), file=sys.stderr)
-        raise RuntimeError("Validation failed; see results/unit_tests.txt")
+        raise RuntimeError(f"Validation failed or skipped; see {out / 'unit_tests.txt'}")
     return summary
 
 
@@ -307,9 +316,7 @@ def main():
                        "SBOX1": reference.LEFT_BOX, "SBOX2": reference.RIGHT_BOX},
         "environment": {"python": sys.version, "executable": sys.executable, "platform": platform.platform(),
                         "implementation": platform.python_implementation(), "cwd": str(ROOT)},
-        "source_sha256": {name: sha256(ROOT / name) for name in ("sdes.py", "analysis_tools.py", "reference_sdes.py",
-                          "scripts/run_evidence.py", "scripts/compare_cross_vectors.py", "tests/test_sdes.py",
-                          "tests/test_analysis_tools.py", "tests/test_exchange.py")},
+        "source_sha256": source_hashes(),
         "unit_tests": tests,
         "stage1_basic": {"hand_vectors_passed": True, "exhaustive_assignment_pairs": 262144,
                          "fixed_key_bijections_verified": 1024, "invalid_inputs_rejected": True,

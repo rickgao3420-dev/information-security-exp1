@@ -1,5 +1,6 @@
 {
-  "captured_at": "2026-10-07T22:30:23.899+08:00",
+  "schema": "sdes-gui-evidence-v3",
+  "captured_at": "2026-10-07T23:44:03.557+08:00",
   "platform": "offscreen",
   "window_size": [
     1140,
@@ -138,24 +139,73 @@
     }
   ],
   "screenshots": [
-    "artifacts\\gui\\01_bits_encrypt.png",
-    "artifacts\\gui\\02_bits_decrypt.png",
-    "artifacts\\gui\\03_ascii_hex.png",
-    "artifacts\\gui\\04_ascii_base64.png",
-    "artifacts\\gui\\05_brute_single_pair.png",
-    "artifacts\\gui\\06_brute_multiple_pairs.png",
-    "artifacts\\gui\\07_collision.png",
-    "artifacts\\gui\\08_invalid_input.png",
-    "artifacts\\gui\\09_invalid_ascii.png",
-    "artifacts\\gui\\10_cumulative_mode.png"
+    "artifacts/gui/01_bits_encrypt.png",
+    "artifacts/gui/02_bits_decrypt.png",
+    "artifacts/gui/03_ascii_hex.png",
+    "artifacts/gui/04_ascii_base64.png",
+    "artifacts/gui/05_brute_single_pair.png",
+    "artifacts/gui/06_brute_multiple_pairs.png",
+    "artifacts/gui/07_collision.png",
+    "artifacts/gui/08_invalid_input.png",
+    "artifacts/gui/09_invalid_ascii.png",
+    "artifacts/gui/10_cumulative_mode.png"
   ],
+  "source_sha256": {
+    "gui.py": "3febf2abbb1abf3ee0466cdfed5b4bb2aed7298d33b79e757507ab3c4e14a5bc",
+    "sdes.py": "e6a29d0a980f88b2ae590f8176113c142b74d7eea75b018072d67ac8c0972092",
+    "analysis_tools.py": "64d586c8abfe07bc80d3ca6fef328711ff7f8b85144e977d89cd1c6f00b2e63c",
+    "scripts/capture_gui.py": "8a23fab19582ab0bb35e897feeb19dde0bb870fe991533341123952dfff8e594",
+    "requirements.txt": "dc21fb37767d1cbdf0b8407c8eabce53cfae6157f62c0eb0d8c4252a4d5a62f6"
+  },
+  "files": {
+    "01_bits_encrypt.png": {
+      "size_bytes": 79631,
+      "sha256": "fdd7e5efe6831f2881a57bd258ae8e31811d7e91fb3763445a49c4c74faa9ce5"
+    },
+    "02_bits_decrypt.png": {
+      "size_bytes": 79324,
+      "sha256": "3094f60c9d61efb2063faf7276aa56220aff4f2205eadf267a9fe700dc7d8d6a"
+    },
+    "03_ascii_hex.png": {
+      "size_bytes": 71827,
+      "sha256": "7d3feadcefbf7548b0f5f51dfe1eb61464882559ef0aab803173aefae9b1bf29"
+    },
+    "04_ascii_base64.png": {
+      "size_bytes": 72620,
+      "sha256": "27df2ce1342db28031ec804c2638392c8dfc4142a189d8dc7c736d0e32cd5062"
+    },
+    "05_brute_single_pair.png": {
+      "size_bytes": 88626,
+      "sha256": "caa0d3c0d5c1fcf3dd2934775149e3307eb08bd00403e6adf4c1672419997dd1"
+    },
+    "06_brute_multiple_pairs.png": {
+      "size_bytes": 92925,
+      "sha256": "0b8c2b91789f15119dbeb7a54fac5f002d418c2a44326cf54bd622cda1c624f7"
+    },
+    "07_collision.png": {
+      "size_bytes": 97950,
+      "sha256": "830dfc365716da0a4b9a76199752976ebfe620e587278a51933d7f3077e9ea72"
+    },
+    "08_invalid_input.png": {
+      "size_bytes": 54747,
+      "sha256": "39f1683ab8499c31cb10ddc0289dc2318d1f5b347f4c83e46058926c92f25fa7"
+    },
+    "09_invalid_ascii.png": {
+      "size_bytes": 75108,
+      "sha256": "3e719cdffbe5a0439955fd62912794d4519149374f9a12e6e9e093d4d9ec40dc"
+    },
+    "10_cumulative_mode.png": {
+      "size_bytes": 78242,
+      "sha256": "bb6e7851763c916f444e4fb1d2489a99afa559908045d1cec790f4aafee93719"
+    }
+  },
   "brute_force": {
     "kind": "brute",
     "schedule": "assignment",
-    "started_at": "2026-10-07T22:30:19.698+08:00",
-    "finished_at": "2026-10-07T22:30:19.702+08:00",
-    "elapsed_seconds": 0.004339399994933046,
-    "worker_elapsed_seconds": 0.005636200003209524,
+    "started_at": "2026-10-07T23:44:03.321+08:00",
+    "finished_at": "2026-10-07T23:44:03.331+08:00",
+    "elapsed_seconds": 0.009659400006057695,
+    "worker_elapsed_seconds": 0.010797499999171123,
     "result": {
       "schedule": "assignment",
       "pairs": [
@@ -181,18 +231,18 @@
       "candidate_count": 4,
       "tested_keys": 1024,
       "total_keys": 1024,
-      "elapsed_seconds": 0.004339399994933046,
-      "started_at": "2026-10-07T22:30:19.698+08:00",
-      "finished_at": "2026-10-07T22:30:19.702+08:00"
+      "elapsed_seconds": 0.009659400006057695,
+      "started_at": "2026-10-07T23:44:03.321+08:00",
+      "finished_at": "2026-10-07T23:44:03.331+08:00"
     }
   },
   "multiple_pairs": {
     "kind": "brute",
     "schedule": "assignment",
-    "started_at": "2026-10-07T22:30:21.646+08:00",
-    "finished_at": "2026-10-07T22:30:21.650+08:00",
-    "elapsed_seconds": 0.003759700004593469,
-    "worker_elapsed_seconds": 0.003838900003756862,
+    "started_at": "2026-10-07T23:44:03.372+08:00",
+    "finished_at": "2026-10-07T23:44:03.373+08:00",
+    "elapsed_seconds": 0.0011005000051227398,
+    "worker_elapsed_seconds": 0.0011539999977685511,
     "result": {
       "schedule": "assignment",
       "pairs": [
@@ -238,9 +288,9 @@
       "candidate_count": 2,
       "tested_keys": 1024,
       "total_keys": 1024,
-      "elapsed_seconds": 0.003759700004593469,
-      "started_at": "2026-10-07T22:30:21.646+08:00",
-      "finished_at": "2026-10-07T22:30:21.650+08:00"
+      "elapsed_seconds": 0.0011005000051227398,
+      "started_at": "2026-10-07T23:44:03.372+08:00",
+      "finished_at": "2026-10-07T23:44:03.373+08:00"
     }
   },
   "collision_statistics": {
@@ -260,328 +310,293 @@
       "8": 2
     }
   },
-  "gif": {
-    "path": "D:\\balabala\\信息安全导论\\exp1\\artifacts\\gui\\brute_force_actual.gif",
-    "frame_count": 35,
-    "playback_duration_seconds": 12.7,
-    "actual_computation_seconds": 0.004339399994933046,
-    "note": "真实窗口截图和真实 worker 进度信号。GIF 停留供阅读，播放时长不等于实测破解耗时；计算未插入人为 sleep。",
-    "frames": [
-      {
-        "state": "提交并开始",
-        "done": 0,
-        "total": 1024,
-        "candidates": 0,
-        "signal_elapsed_seconds": 0.0,
-        "captured_at": "2026-10-07T22:30:19.617+08:00",
-        "screenshot": "brute_frames\\frame_000.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 0,
-        "total": 1024,
-        "candidates": 0,
-        "signal_elapsed_seconds": 0.0,
-        "captured_at": "2026-10-07T22:30:19.702+08:00",
-        "screenshot": "brute_frames\\frame_001.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 32,
-        "total": 1024,
-        "candidates": 0,
-        "signal_elapsed_seconds": 0.0001466999965487048,
-        "captured_at": "2026-10-07T22:30:19.762+08:00",
-        "screenshot": "brute_frames\\frame_002.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 64,
-        "total": 1024,
-        "candidates": 0,
-        "signal_elapsed_seconds": 0.000319499995384831,
-        "captured_at": "2026-10-07T22:30:19.807+08:00",
-        "screenshot": "brute_frames\\frame_003.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 96,
-        "total": 1024,
-        "candidates": 0,
-        "signal_elapsed_seconds": 0.0004484999954001978,
-        "captured_at": "2026-10-07T22:30:19.864+08:00",
-        "screenshot": "brute_frames\\frame_004.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 128,
-        "total": 1024,
-        "candidates": 1,
-        "signal_elapsed_seconds": 0.0005705999938072637,
-        "captured_at": "2026-10-07T22:30:19.919+08:00",
-        "screenshot": "brute_frames\\frame_005.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 160,
-        "total": 1024,
-        "candidates": 1,
-        "signal_elapsed_seconds": 0.000694199996360112,
-        "captured_at": "2026-10-07T22:30:19.974+08:00",
-        "screenshot": "brute_frames\\frame_006.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 192,
-        "total": 1024,
-        "candidates": 1,
-        "signal_elapsed_seconds": 0.0008177999989129603,
-        "captured_at": "2026-10-07T22:30:20.058+08:00",
-        "screenshot": "brute_frames\\frame_007.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 224,
-        "total": 1024,
-        "candidates": 1,
-        "signal_elapsed_seconds": 0.001117399995564483,
-        "captured_at": "2026-10-07T22:30:20.121+08:00",
-        "screenshot": "brute_frames\\frame_008.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 256,
-        "total": 1024,
-        "candidates": 1,
-        "signal_elapsed_seconds": 0.0012462999948184006,
-        "captured_at": "2026-10-07T22:30:20.171+08:00",
-        "screenshot": "brute_frames\\frame_009.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 288,
-        "total": 1024,
-        "candidates": 1,
-        "signal_elapsed_seconds": 0.0013767999989795499,
-        "captured_at": "2026-10-07T22:30:20.221+08:00",
-        "screenshot": "brute_frames\\frame_010.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 320,
-        "total": 1024,
-        "candidates": 1,
-        "signal_elapsed_seconds": 0.0015020999999251217,
-        "captured_at": "2026-10-07T22:30:20.267+08:00",
-        "screenshot": "brute_frames\\frame_011.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 352,
-        "total": 1024,
-        "candidates": 1,
-        "signal_elapsed_seconds": 0.001632799998333212,
-        "captured_at": "2026-10-07T22:30:20.343+08:00",
-        "screenshot": "brute_frames\\frame_012.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 384,
-        "total": 1024,
-        "candidates": 2,
-        "signal_elapsed_seconds": 0.0017567999966559,
-        "captured_at": "2026-10-07T22:30:20.393+08:00",
-        "screenshot": "brute_frames\\frame_013.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 416,
-        "total": 1024,
-        "candidates": 2,
-        "signal_elapsed_seconds": 0.0018832999994629063,
-        "captured_at": "2026-10-07T22:30:20.447+08:00",
-        "screenshot": "brute_frames\\frame_014.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 448,
-        "total": 1024,
-        "candidates": 2,
-        "signal_elapsed_seconds": 0.002007699993555434,
-        "captured_at": "2026-10-07T22:30:20.520+08:00",
-        "screenshot": "brute_frames\\frame_015.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 480,
-        "total": 1024,
-        "candidates": 2,
-        "signal_elapsed_seconds": 0.002134899994416628,
-        "captured_at": "2026-10-07T22:30:20.599+08:00",
-        "screenshot": "brute_frames\\frame_016.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 512,
-        "total": 1024,
-        "candidates": 2,
-        "signal_elapsed_seconds": 0.002268999996886123,
-        "captured_at": "2026-10-07T22:30:20.649+08:00",
-        "screenshot": "brute_frames\\frame_017.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 544,
-        "total": 1024,
-        "candidates": 2,
-        "signal_elapsed_seconds": 0.0023965999935171567,
-        "captured_at": "2026-10-07T22:30:20.715+08:00",
-        "screenshot": "brute_frames\\frame_018.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 576,
-        "total": 1024,
-        "candidates": 2,
-        "signal_elapsed_seconds": 0.002522799994039815,
-        "captured_at": "2026-10-07T22:30:20.784+08:00",
-        "screenshot": "brute_frames\\frame_019.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 608,
-        "total": 1024,
-        "candidates": 2,
-        "signal_elapsed_seconds": 0.0026503999979468063,
-        "captured_at": "2026-10-07T22:30:20.837+08:00",
-        "screenshot": "brute_frames\\frame_020.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 640,
-        "total": 1024,
-        "candidates": 2,
-        "signal_elapsed_seconds": 0.002777800000330899,
-        "captured_at": "2026-10-07T22:30:20.897+08:00",
-        "screenshot": "brute_frames\\frame_021.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 672,
-        "total": 1024,
-        "candidates": 3,
-        "signal_elapsed_seconds": 0.0029029999932390638,
-        "captured_at": "2026-10-07T22:30:20.955+08:00",
-        "screenshot": "brute_frames\\frame_022.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 704,
-        "total": 1024,
-        "candidates": 3,
-        "signal_elapsed_seconds": 0.0030487999974866398,
-        "captured_at": "2026-10-07T22:30:21.000+08:00",
-        "screenshot": "brute_frames\\frame_023.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 736,
-        "total": 1024,
-        "candidates": 3,
-        "signal_elapsed_seconds": 0.003173099998093676,
-        "captured_at": "2026-10-07T22:30:21.059+08:00",
-        "screenshot": "brute_frames\\frame_024.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 768,
-        "total": 1024,
-        "candidates": 3,
-        "signal_elapsed_seconds": 0.003296799994132016,
-        "captured_at": "2026-10-07T22:30:21.108+08:00",
-        "screenshot": "brute_frames\\frame_025.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 800,
-        "total": 1024,
-        "candidates": 3,
-        "signal_elapsed_seconds": 0.00342359999922337,
-        "captured_at": "2026-10-07T22:30:21.157+08:00",
-        "screenshot": "brute_frames\\frame_026.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 832,
-        "total": 1024,
-        "candidates": 3,
-        "signal_elapsed_seconds": 0.0035537999938242137,
-        "captured_at": "2026-10-07T22:30:21.204+08:00",
-        "screenshot": "brute_frames\\frame_027.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 864,
-        "total": 1024,
-        "candidates": 3,
-        "signal_elapsed_seconds": 0.0036829999953624792,
-        "captured_at": "2026-10-07T22:30:21.255+08:00",
-        "screenshot": "brute_frames\\frame_028.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 896,
-        "total": 1024,
-        "candidates": 3,
-        "signal_elapsed_seconds": 0.003812599999946542,
-        "captured_at": "2026-10-07T22:30:21.304+08:00",
-        "screenshot": "brute_frames\\frame_029.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 928,
-        "total": 1024,
-        "candidates": 4,
-        "signal_elapsed_seconds": 0.003940499998861924,
-        "captured_at": "2026-10-07T22:30:21.356+08:00",
-        "screenshot": "brute_frames\\frame_030.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 960,
-        "total": 1024,
-        "candidates": 4,
-        "signal_elapsed_seconds": 0.004066099994815886,
-        "captured_at": "2026-10-07T22:30:21.408+08:00",
-        "screenshot": "brute_frames\\frame_031.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 992,
-        "total": 1024,
-        "candidates": 4,
-        "signal_elapsed_seconds": 0.004193699998722877,
-        "captured_at": "2026-10-07T22:30:21.454+08:00",
-        "screenshot": "brute_frames\\frame_032.png"
-      },
-      {
-        "state": "真实检查进度",
-        "done": 1024,
-        "total": 1024,
-        "candidates": 4,
-        "signal_elapsed_seconds": 0.0043330999978934415,
-        "captured_at": "2026-10-07T22:30:21.505+08:00",
-        "screenshot": "brute_frames\\frame_033.png"
-      },
-      {
-        "state": "实际破解完成",
-        "done": 1024,
-        "total": 1024,
-        "candidates": 4,
-        "signal_elapsed_seconds": 0.004339399994933046,
-        "captured_at": "2026-10-07T22:30:21.555+08:00",
-        "screenshot": "brute_frames\\frame_034.png"
+  "progress_events": [
+    {
+      "state": "started",
+      "done": 0,
+      "total": 1024,
+      "candidates": 0,
+      "signal_elapsed_seconds": 0.0,
+      "observed_at": "2026-10-07T23:44:03.320+08:00",
+      "submission": {
+        "submitted_at": "2026-10-07T23:44:03.319+08:00",
+        "schedule": "assignment"
       }
-    ]
-  }
+    },
+    {
+      "state": "progress",
+      "done": 0,
+      "total": 1024,
+      "candidates": 0,
+      "signal_elapsed_seconds": 0.0,
+      "observed_at": "2026-10-07T23:44:03.332+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 32,
+      "total": 1024,
+      "candidates": 0,
+      "signal_elapsed_seconds": 0.0007805999994161539,
+      "observed_at": "2026-10-07T23:44:03.333+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 64,
+      "total": 1024,
+      "candidates": 0,
+      "signal_elapsed_seconds": 0.0011475999999674968,
+      "observed_at": "2026-10-07T23:44:03.334+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 96,
+      "total": 1024,
+      "candidates": 0,
+      "signal_elapsed_seconds": 0.0015050000001792796,
+      "observed_at": "2026-10-07T23:44:03.334+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 128,
+      "total": 1024,
+      "candidates": 1,
+      "signal_elapsed_seconds": 0.0018026000034296885,
+      "observed_at": "2026-10-07T23:44:03.334+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 160,
+      "total": 1024,
+      "candidates": 1,
+      "signal_elapsed_seconds": 0.002081200000247918,
+      "observed_at": "2026-10-07T23:44:03.334+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 192,
+      "total": 1024,
+      "candidates": 1,
+      "signal_elapsed_seconds": 0.00235650000104215,
+      "observed_at": "2026-10-07T23:44:03.334+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 224,
+      "total": 1024,
+      "candidates": 1,
+      "signal_elapsed_seconds": 0.002621999999973923,
+      "observed_at": "2026-10-07T23:44:03.334+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 256,
+      "total": 1024,
+      "candidates": 1,
+      "signal_elapsed_seconds": 0.0028925000005983748,
+      "observed_at": "2026-10-07T23:44:03.335+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 288,
+      "total": 1024,
+      "candidates": 1,
+      "signal_elapsed_seconds": 0.0031706000008853152,
+      "observed_at": "2026-10-07T23:44:03.335+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 320,
+      "total": 1024,
+      "candidates": 1,
+      "signal_elapsed_seconds": 0.0034761999995680526,
+      "observed_at": "2026-10-07T23:44:03.335+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 352,
+      "total": 1024,
+      "candidates": 1,
+      "signal_elapsed_seconds": 0.0038361000042641535,
+      "observed_at": "2026-10-07T23:44:03.335+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 384,
+      "total": 1024,
+      "candidates": 2,
+      "signal_elapsed_seconds": 0.004110800000489689,
+      "observed_at": "2026-10-07T23:44:03.335+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 416,
+      "total": 1024,
+      "candidates": 2,
+      "signal_elapsed_seconds": 0.0043820000064442866,
+      "observed_at": "2026-10-07T23:44:03.335+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 448,
+      "total": 1024,
+      "candidates": 2,
+      "signal_elapsed_seconds": 0.0046548000027542,
+      "observed_at": "2026-10-07T23:44:03.335+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 480,
+      "total": 1024,
+      "candidates": 2,
+      "signal_elapsed_seconds": 0.004927400004817173,
+      "observed_at": "2026-10-07T23:44:03.336+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 512,
+      "total": 1024,
+      "candidates": 2,
+      "signal_elapsed_seconds": 0.005204900000535417,
+      "observed_at": "2026-10-07T23:44:03.336+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 544,
+      "total": 1024,
+      "candidates": 2,
+      "signal_elapsed_seconds": 0.0054761000064900145,
+      "observed_at": "2026-10-07T23:44:03.336+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 576,
+      "total": 1024,
+      "candidates": 2,
+      "signal_elapsed_seconds": 0.005750700001954101,
+      "observed_at": "2026-10-07T23:44:03.336+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 608,
+      "total": 1024,
+      "candidates": 2,
+      "signal_elapsed_seconds": 0.006024300004355609,
+      "observed_at": "2026-10-07T23:44:03.336+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 640,
+      "total": 1024,
+      "candidates": 2,
+      "signal_elapsed_seconds": 0.006300500004726928,
+      "observed_at": "2026-10-07T23:44:03.336+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 672,
+      "total": 1024,
+      "candidates": 3,
+      "signal_elapsed_seconds": 0.006569800003489945,
+      "observed_at": "2026-10-07T23:44:03.336+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 704,
+      "total": 1024,
+      "candidates": 3,
+      "signal_elapsed_seconds": 0.00685870000597788,
+      "observed_at": "2026-10-07T23:44:03.337+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 736,
+      "total": 1024,
+      "candidates": 3,
+      "signal_elapsed_seconds": 0.007130500001949258,
+      "observed_at": "2026-10-07T23:44:03.337+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 768,
+      "total": 1024,
+      "candidates": 3,
+      "signal_elapsed_seconds": 0.007402400005958043,
+      "observed_at": "2026-10-07T23:44:03.337+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 800,
+      "total": 1024,
+      "candidates": 3,
+      "signal_elapsed_seconds": 0.007673400003113784,
+      "observed_at": "2026-10-07T23:44:03.337+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 832,
+      "total": 1024,
+      "candidates": 3,
+      "signal_elapsed_seconds": 0.007947199999762233,
+      "observed_at": "2026-10-07T23:44:03.337+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 864,
+      "total": 1024,
+      "candidates": 3,
+      "signal_elapsed_seconds": 0.00822330000664806,
+      "observed_at": "2026-10-07T23:44:03.337+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 896,
+      "total": 1024,
+      "candidates": 3,
+      "signal_elapsed_seconds": 0.008500500000081956,
+      "observed_at": "2026-10-07T23:44:03.337+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 928,
+      "total": 1024,
+      "candidates": 4,
+      "signal_elapsed_seconds": 0.008781200005614664,
+      "observed_at": "2026-10-07T23:44:03.337+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 960,
+      "total": 1024,
+      "candidates": 4,
+      "signal_elapsed_seconds": 0.009064000005309936,
+      "observed_at": "2026-10-07T23:44:03.338+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 992,
+      "total": 1024,
+      "candidates": 4,
+      "signal_elapsed_seconds": 0.00934590000542812,
+      "observed_at": "2026-10-07T23:44:03.338+08:00"
+    },
+    {
+      "state": "progress",
+      "done": 1024,
+      "total": 1024,
+      "candidates": 4,
+      "signal_elapsed_seconds": 0.009646700003941078,
+      "observed_at": "2026-10-07T23:44:03.338+08:00"
+    },
+    {
+      "state": "completed",
+      "done": 1024,
+      "total": 1024,
+      "candidates": 4,
+      "signal_elapsed_seconds": 0.009659400006057695,
+      "observed_at": "2026-10-07T23:44:03.340+08:00",
+      "started_at": "2026-10-07T23:44:03.321+08:00",
+      "finished_at": "2026-10-07T23:44:03.331+08:00",
+      "elapsed_seconds": 0.009659400006057695
+    }
+  ]
 }

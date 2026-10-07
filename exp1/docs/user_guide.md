@@ -4,7 +4,7 @@
 
 ## 1. 环境准备与启动
 
-需要 Python **3.10 或更高版本**。本次验证环境为 Python **3.13.5**、PyQt5 **5.15.10**、Qt 运行时 **5.15.2**、Pillow **11.1.0**。PyQt5 包版本与 Qt 运行时版本是不同的版本号。
+需要 Python **3.10 或更高版本**。本次验证环境为 Python **3.13.5**、PyQt5 **5.15.10**、Qt 运行时 **5.15.2**。PyQt5 包版本与 Qt 运行时版本是不同的版本号。
 
 在终端进入 `exp1` 后安装项目依赖并启动 GUI：
 
@@ -27,11 +27,11 @@ python -m venv .venv
 .\.venv\Scripts\python.exe gui.py
 ```
 
-核心算法与 CLI 使用 Python 标准库；PyQt5 用于图形界面，Pillow 用于生成截图证据中的动画和文字标注。检查当前解释器与依赖：
+核心算法与 CLI 使用 Python 标准库；PyQt5 用于图形界面与截图。检查当前解释器与依赖：
 
 ```powershell
 python --version
-python -m pip show PyQt5 Pillow
+python -m pip show PyQt5
 ```
 
 ## 2. 先确认子密钥生成模式
@@ -118,7 +118,7 @@ ASCII 范围为 0～127。英文字母、数字、常用英文标点及换行可
 
 此时保留两个候选 `1010000010`、`1110000010`。程序会报告全部候选，不能将这两个候选视为已唯一确定原始密钥。零候选说明这些输入对与选定模式不相容，也可能是明文、密文或模式填写错误。
 
-GUI 接受每行用空白、英文逗号或中文逗号分隔的两段位串；建议统一使用空格。GUI 不接受 CLI 示例中的冒号分隔形式。计算由后台线程执行，计算期间相关操作按钮及模式选择被禁用，避免重复并发计算。
+GUI 接受每行用空白、英文逗号或中文逗号分隔的两段位串；建议统一使用空格。GUI 不接受 CLI 示例中的冒号分隔形式。计算由后台线程执行，计算期间所有操作输入、密文格式、按钮及模式选择被禁用，结果与本次输入保持对应。非法输入会撤下旧分析报告和计时；后台任务失败显示失败前实测耗时，结束后可修正并重试。
 
 ![暴力破解界面](../artifacts/gui/05_brute_single_pair.png)
 
@@ -249,7 +249,7 @@ python scripts/compare_cross_vectors.py results/cross_vectors.csv --implementati
 python scripts/compare_cross_vectors.py other_group_vectors.json --source-label '实际提供文件的小组编号' --output results/external_vector_comparison.json
 ```
 
-比较报告保存来源名称、文件路径、SHA-256、验证的向量数及逐行差异，同时验证给定密文能否解回明文。无差异时退出码为 0，有差异时为 1。应保存实际收到的文件和来源记录。
+比较报告保存来源名称、文件路径、SHA-256、验证的向量数及逐行差异，同时验证给定密文能否解回明文。无差异时退出码为0，有差异时为1。非法文件内容退出2，并将输出报告改写为 `successful=false`、`status=invalid_input`，记录 `input_errors`，避免把上次的成功报告当成本次结果；输出路径不能与输入相同。应保存实际收到的文件和来源记录。
 
 项目当前提供的是两个独立**本地实现**的交叉验证与交换工具；没有提供其他小组的实际程序或输出，不能将本地向量比较称为“已经通过他组测试”。JSON/CSV 工具的存在也不代表外部测试已经发生。
 
@@ -261,7 +261,7 @@ python scripts/compare_cross_vectors.py other_group_vectors.json --source-label 
 python -m unittest discover -s tests -v
 ```
 
-测试包括输入约束、已知向量、两个独立本地实现的比较、ASCII/字节往返、破解与碰撞分析。默认模式的穷举测试覆盖 1024 个密钥 × 256 个分组，运行时间可能比单次 GUI 操作长。
+测试包括输入约束、已知向量、两个独立本地实现的比较、ASCII/字节往返、破解与碰撞分析、交换文件及 GUI 错误状态回归。两种模式的全域测试各覆盖 1024 个密钥 × 256 个分组。没有安装 PyQt5 时，GUI 回归测试会标记为跳过；完整计算证据生成要求依赖已安装且全部测试通过、无跳过。
 
 生成完整计算证据：
 
@@ -279,13 +279,15 @@ python scripts/run_evidence.py
 - `equivalent_keys_*.json`、`full_mapping_*.bin`：等价密钥与完整加密映射。
 - `summary.json`、`evidence_manifest.json`：结果汇总、运行环境与文件摘要。
 
-生成真实 GUI 截图与破解 GIF：
+生成真实 GUI 静态截图与控件检查记录：
 
 ```powershell
 python scripts/capture_gui.py
 ```
 
 脚本明确设置 `QT_QPA_PLATFORM=offscreen`，通过 QtTest 操作本应用控件，并使用 `QWidget.grab()` 保存真实窗口；不会控制其他桌面应用。Windows offscreen 插件会显式加载本机中文字体，保证截图可读。
+
+生成后运行 `python scripts/audit_submission.py`，只读核对链接、测试记录、源码与结果/截图摘要；若源码或证据已变动，会提示重新生成。审核通过不能替代真实组间互测。
 
 默认输出到 `artifacts/gui/`：
 
@@ -295,10 +297,9 @@ python scripts/capture_gui.py
 - `07_collision.png`：密钥碰撞分组。
 - `08_invalid_input.png`、`09_invalid_ascii.png`：非法输入提示。
 - `10_cumulative_mode.png`：课件兼容模式。
-- `brute_force_actual.gif`、`brute_animation_start.png`、`brute_animation_end.png`：真实破解信号状态与计时标注。
-- `capture_manifest.json`：控件检查结果、截图列表、每帧捕获时间和进度信号耗时。
+- `capture_manifest.json`：控件检查结果、截图列表和真实任务计时。
 
-GIF 使用真实 worker 的开始、每 32 个密钥的进度信号及完成状态。穷举只有 1024 个密钥，算法可能在几毫秒内完成；GUI 信号处理和截图可能晚于信号发出，manifest 分别记录进度耗时与帧捕获时间。动画延长各帧停留以便阅读，每帧明确标注**播放时长不等于破解耗时**。算法没有加入人为睡眠；实测计算耗时以 manifest 中的 `actual_computation_seconds` 和原始结果的 `elapsed_seconds` 为准。
+当前仅保存静态截图和真实任务计时，动态演示已删除。第 4 关的实现与计算验证通过，但作业要求的视频或动图提交证据未保留。GUI 后台分析的计时见 `capture_manifest.json` 中的任务报告；算法原始计时见结果中的 `elapsed_seconds`。
 
 也可以选择其他输出目录：
 
@@ -308,7 +309,7 @@ python scripts/capture_gui.py --output artifacts/gui_repeat
 
 ## 7. 常见问题
 
-- **找不到 PyQt5 或 Pillow：** 用启动程序的同一个解释器执行 `python -m pip install -r requirements.txt`，核对 `python -m pip show PyQt5 Pillow`。
+- **找不到 PyQt5：** 用启动程序的同一个解释器执行 `python -m pip install -r requirements.txt`，核对 `python -m pip show PyQt5`。
 - **加密后不能还原：** 检查密钥、位宽、子密钥模式和 Hex/Base64 选择是否一致；密文中的前导零不能省略。
 - **ASCII 解密报错：** 检查密文格式、密钥和模式。错误密钥解出的字节可能超过 ASCII 范围，程序会拒绝将其强转为 ASCII。
 - **破解没有候选：** 核对每一对明密文是否真实对应，并检查它们是否来自当前模式。

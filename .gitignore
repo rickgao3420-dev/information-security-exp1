@@ -1,0 +1,6 @@
+# 仅跟踪本实验的交付文件。
+/*
+!/.gitignore
+!/.gitattributes
+!/README.md
+!/exp1/

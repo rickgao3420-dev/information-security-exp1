@@ -134,6 +134,8 @@ def trace_bits(block: str, key: str, schedule: str = "assignment", decrypt: bool
     """Expose intermediate strings for checking a hand calculation."""
     _bits(block, 8, "block")
     _bits(key, 10, "key")
+    if not isinstance(decrypt, bool):
+        raise ValueError("decrypt must be a bool")
     k1, k2 = generate_subkeys_bits(key, schedule)
     ordered_keys = (k2, k1) if decrypt else (k1, k2)
     initial = _permute(block, IP)
